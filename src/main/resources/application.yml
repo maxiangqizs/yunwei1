@@ -18,4 +18,4 @@ dispatcher:
   quartzPoolSize: 2
   quartz-infos:
     - cron: "0 0/2 * * * ? "
-      tasks: ["com.neusoft.yunwei.CheckReport"]
+      tasks: ["com.neusoft.yunwei.Task.CheckReport"]

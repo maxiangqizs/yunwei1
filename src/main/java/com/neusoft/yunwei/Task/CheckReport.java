@@ -1,7 +1,6 @@
-package com.neusoft.yunwei;
+package com.neusoft.yunwei.Task;
 
 import com.neusoft.yunwei.Config.AppConfiguration;
-import com.neusoft.yunwei.Task.TaskInfo;
 import com.neusoft.yunwei.pojo.CodeTable;
 import com.neusoft.yunwei.pojo.DiskStatusAlarmTable;
 import com.neusoft.yunwei.service.ICodeTableService;
@@ -9,17 +8,16 @@ import com.neusoft.yunwei.service.IDiskStatusAlarmTableService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-/*@RestController
+@RestController
 @RequestMapping("/ChexkReport")
 @Slf4j
 @Component
@@ -40,8 +38,8 @@ public class CheckReport extends TaskInfo {
     IDiskStatusAlarmTableService diskStatusAlarmTableService;
     @Autowired
     DiskStatusAlarmTable diskStatusAlarmTable;
-  *//*  @RequestMapping("/urlResut")
-    @ResponseBody*//*
+  /*  @RequestMapping("/urlResut")
+    @ResponseBody*/
     public void excuteTask(){
         try{
         File file=new File("E:/bigdata/data/distUse.txt");
@@ -49,7 +47,7 @@ public class CheckReport extends TaskInfo {
        InputStream log = null;
        BufferedReader logBR = null;
        String[] args = new String[]{"0"};
-       *//*log = new FileInputStream(args[0]);*//*
+       /*log = new FileInputStream(args[0]);*/
        logBR = new BufferedReader(new InputStreamReader(new FileInputStream(file )));
        String lastIp = null;
        String head = null;
@@ -111,7 +109,7 @@ public class CheckReport extends TaskInfo {
    }
 
 
-}*/
+}
 
 
 
