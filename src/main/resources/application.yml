@@ -17,5 +17,7 @@ dispatcher:
 #    1: ["com.neusoft.logstore.dispatcher.service.DealService","com.neusoft.logstore.dispatcher.service.DealService"]
   quartzPoolSize: 2
   quartz-infos:
-    - cron: "0 0/2 * * * ? "
-      tasks: ["com.neusoft.yunwei.Task.CheckReport"]
+#    - cron: "0 0/2 * * * ? "
+#      tasks: ["com.neusoft.yunwei.Task.CheckReport"]
+    - cron: "0 0/1 * * * ? "
+      tasks: ["com.neusoft.yunwei.Task.CompressionRatio"]

@@ -60,7 +60,7 @@ public class generator2 {
         strategy.setRestControllerStyle(true);
 
         //strategy.setSuperEntityColumns("id");ANTI_D_MODEL_MATCH_DATA
-        strategy.setInclude("Disk_status_alarm_table");
+        strategy.setInclude("log_metrics");
         strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix(pc.getModuleName() + "_");
         mpg.setStrategy(strategy);
