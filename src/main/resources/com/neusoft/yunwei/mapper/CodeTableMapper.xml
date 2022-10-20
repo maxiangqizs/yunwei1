@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.yunwei.mapper.CodeTableMapper">
+
+
+    <select id="selectByIp" resultType="com.neusoft.yunwei.pojo.CodeTable">
+        select provice,cluster from code_table where ip = #{lastIp};
+    </select>
+</mapper>
