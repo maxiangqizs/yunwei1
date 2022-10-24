@@ -60,7 +60,7 @@ public class generator2 {
         strategy.setRestControllerStyle(true);
 
         //strategy.setSuperEntityColumns("id");ANTI_D_MODEL_MATCH_DATA
-        strategy.setInclude("log_metrics");
+        strategy.setInclude("t_data_compress_ratio_ind");
         strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix(pc.getModuleName() + "_");
         mpg.setStrategy(strategy);

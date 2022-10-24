@@ -16,6 +16,10 @@ import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * 磁盘告警
+ */
+
 
 @RestController
 @RequestMapping("/ChexkReport")
@@ -28,7 +32,7 @@ public class CheckReport extends TaskInfo {
     public String diskName;
     public String diskUsage;
     public String time;
-    SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-dd");
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     @Autowired
     public AppConfiguration appConfiguration;
 
