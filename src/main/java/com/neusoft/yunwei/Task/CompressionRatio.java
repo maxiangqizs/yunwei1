@@ -1,6 +1,7 @@
 package com.neusoft.yunwei.Task;
 
 
+import com.neusoft.yunwei.Config.DateUtils;
 import com.neusoft.yunwei.pojo.TDataCompressRatioInd;
 import com.neusoft.yunwei.service.ITDataCompressRatioIndService;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +16,9 @@ import java.util.*;
 import java.util.Date;
 
 /**
- * 压缩比
+ * 压缩比 待修改点
+ * 1.如何获取45G具体机器数
+ * 2.
  */
 
 @Slf4j
@@ -47,7 +50,6 @@ public class CompressionRatio extends TaskInfo{
         Connection conn1 = null;
         PreparedStatement prepare = null;
         PreparedStatement prepare1 = null;
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try{
             // 注册 JDBC 驱动
             Class.forName(JDBC_DRIVER);
@@ -61,10 +63,12 @@ public class CompressionRatio extends TaskInfo{
             String sqlconfig = "select ip,my_sql_url,port from T_mysql_url_config ";
             prepare = conn.prepareStatement(sqlconfig);
             ResultSet rs = prepare.executeQuery();
+            Runtime rt = Runtime.getRuntime();
 
 
 
-            while (rs.next()) {
+
+           while (rs.next()) {
                 String ip = rs.getString("ip");
                 String my_sql_name = rs.getString("my_sql_url");
                 String port = rs.getString("port");
@@ -75,9 +79,9 @@ public class CompressionRatio extends TaskInfo{
                         "biz_code like '4G%' or biz_code like '24IOT%' or \n" +
                         "biz_code like 'GM%' then size_mb else 0 end)/1024/1024 as '4g压缩前' ,\n" +
                         "sum(case when biz_code like '5G%'then size_mb else 0 end)/1024/1024 as '5g压缩前',\n" +
-                        "b.provice as '省份'" +
-                        "from log_metrics a  inner join code_table b on a.ip=b.ip  \n" +
-                        "where stage='read' and log_time >= '20220523000000' AND log_time < '20220524000000'\n" +
+                        "b.provice\n" +
+                        "from log_metrics a  inner join t_province_server_config b on a.ip=b.ip  \n" +
+                        "where stage='read' and log_time >= '" + DateUtils.lastday() +"' AND log_time < '"+ DateUtils.today()+"'\n" +
                         "group by b.provice;";
 
                 prepare1 = conn1.prepareStatement(sql1);
@@ -90,7 +94,9 @@ public class CompressionRatio extends TaskInfo{
                     String BeforeCompression = rs1.getString("压缩前");
                     String demo1 = rs1.getString("4g压缩前");
                     String demo2 = rs1.getString("5g压缩前");
-                    String provice = rs1.getString("省份");
+                    String provice = rs1.getString("provice");
+                    String totalAfterCompress = null;
+                    String count = null;
                     data.put("4G",demo1);
                     data.put("5G",demo2);
 
@@ -101,11 +107,14 @@ public class CompressionRatio extends TaskInfo{
                         String key=entry.getKey();
                         String value=entry.getValue();
                         System.out.println(key+"->>>"+value);
+
                         tDataCompressRatioInd.setProvince(provice);
                         tDataCompressRatioInd.setTotalBeforeCompress(BeforeCompression);
+//                        Process p = rt.exec("hadoop fs -du -s /warehouse/tablespace/managed/hive/*/hour_id=20221025*|awk -F ' '  '{sum +=$2};END {print sum/1024/1024/1024/1024}'");
+//                        tDataCompressRatioInd.setTotalAfterCompress(String.valueOf(p));
                         tDataCompressRatioInd.setDataType(key);
                         tDataCompressRatioInd.setBeforeCompress(value);
-                        tDataCompressRatioInd.setCheckTime(format.format(new Date()));
+                        tDataCompressRatioInd.setCheckTime(DateUtils.today());
                         tDataCompressRatioInd.setProcessPerformance(Float.parseFloat(value)*1024*1024/(24*60*60)/20+"");
                         System.out.println(Float.parseFloat(value)*1024*1024/(24*60*60)/20+"");
                         itDataCompressRatioIndService.insert(tDataCompressRatioInd);
