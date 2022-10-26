@@ -19,14 +19,14 @@ public class generator2 {
         GlobalConfig gc = new GlobalConfig();
         String projectPath = System.getProperty("user.dir");
         gc.setOutputDir(projectPath + "/src/main/java");
-        gc.setAuthor("zhang");
+        gc.setAuthor("Ma");
         gc.setOpen(false);
         // gc.setSwagger2(true); 实体属性 Swagger2 注解
         mpg.setGlobalConfig(gc);
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
         /*dsc.setUrl("jdbc:oracle:thin:@10.4.66.80:1521:bighead");*/
-        dsc.setUrl("jdbc:mysql://localhost:3306/yunwei?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2b8");
+        dsc.setUrl("jdbc:mysql://localhost:3306/mxq01?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2b8");
         // dsc.setSchemaName("public");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
@@ -60,7 +60,7 @@ public class generator2 {
         strategy.setRestControllerStyle(true);
 
         //strategy.setSuperEntityColumns("id");ANTI_D_MODEL_MATCH_DATA
-        strategy.setInclude("t_data_compress_ratio_ind");
+        strategy.setInclude("T_province_server_config");
         strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix(pc.getModuleName() + "_");
         mpg.setStrategy(strategy);

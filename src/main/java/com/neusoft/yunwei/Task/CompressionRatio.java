@@ -1,7 +1,7 @@
 package com.neusoft.yunwei.Task;
 
 
-import com.neusoft.yunwei.Config.DateUtils;
+import com.neusoft.yunwei.Utils.DateUtils;
 import com.neusoft.yunwei.pojo.TDataCompressRatioInd;
 import com.neusoft.yunwei.service.ITDataCompressRatioIndService;
 import lombok.RequiredArgsConstructor;
@@ -10,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.*;
-import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.Date;
 
 /**
  * 压缩比 待修改点

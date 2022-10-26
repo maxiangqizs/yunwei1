@@ -1,4 +1,4 @@
-package com.neusoft.yunwei.Config;
+package com.neusoft.yunwei.Utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
