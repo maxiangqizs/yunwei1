@@ -1,10 +1,11 @@
 package com.neusoft.yunwei.Task;
 
 import com.neusoft.yunwei.Config.AppConfiguration;
-import com.neusoft.yunwei.pojo.CodeTable;
+import com.neusoft.yunwei.Utils.DateUtils;
 import com.neusoft.yunwei.pojo.DiskStatusAlarmTable;
-import com.neusoft.yunwei.service.ICodeTableService;
+import com.neusoft.yunwei.pojo.TProvinceServerConfig;
 import com.neusoft.yunwei.service.IDiskStatusAlarmTableService;
+import com.neusoft.yunwei.service.ITProvinceServerConfigService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * 磁盘告警
@@ -32,12 +31,12 @@ public class CheckReport extends TaskInfo {
     public String diskName;
     public String diskUsage;
     public String time;
-    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
     @Autowired
     public AppConfiguration appConfiguration;
 
-    @Autowired
-    ICodeTableService codeTableService;
+   @Autowired
+    ITProvinceServerConfigService itProvinceServerConfigService;
     @Autowired
     IDiskStatusAlarmTableService diskStatusAlarmTableService;
     @Autowired
@@ -87,12 +86,12 @@ public class CheckReport extends TaskInfo {
                        }
 
                        System.out.println(tmpstr + "% " + head.substring(head.lastIndexOf("/"), head.length()));
-                       CodeTable codeTable = codeTableService.selectByIp(lastIp);
-                       provice = codeTable.getProvice();
-                       cluster = codeTable.getCluster();
+                       TProvinceServerConfig tProvinceServerConfig = itProvinceServerConfigService.selectByIp(lastIp);
+                       provice = tProvinceServerConfig.getProvince();
+                       cluster = tProvinceServerConfig.getCluster();
                        diskName = head.substring(head.lastIndexOf("/"), head.length());
                        diskUsage = tmpstr + "%";
-                       time = format.format(new Date());
+                       time = DateUtils.today();
                        diskStatusAlarmTable.setCluster(cluster);
                        diskStatusAlarmTable.setProvince(provice);
                        diskStatusAlarmTable.setIp(lastIp);
@@ -111,6 +110,7 @@ public class CheckReport extends TaskInfo {
             e.printStackTrace();
         }
    }
+
 
 
 }

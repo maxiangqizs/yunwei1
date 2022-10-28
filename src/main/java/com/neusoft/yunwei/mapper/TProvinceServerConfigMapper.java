@@ -15,4 +15,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TProvinceServerConfigMapper extends BaseMapper<TProvinceServerConfig> {
 
+
+    Integer count(String provice, String key);
+
+    TProvinceServerConfig select(String lastIp);
 }

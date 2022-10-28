@@ -26,4 +26,16 @@ public class TProvinceServerConfigServiceImpl extends ServiceImpl<TProvinceServe
     public List<TProvinceServerConfig> select(Object o) {
         return tProvinceServerConfigMapper.selectList(null);
     }
+
+    @Override
+    public Integer CountByProvince(String provice, String key) {
+        return tProvinceServerConfigMapper.count(provice,key);
+    }
+
+    @Override
+    public TProvinceServerConfig selectByIp(String lastIp) {
+        return tProvinceServerConfigMapper.select(lastIp);
+    }
+
+
 }

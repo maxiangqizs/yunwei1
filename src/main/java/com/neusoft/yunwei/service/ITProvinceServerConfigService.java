@@ -18,4 +18,9 @@ public interface ITProvinceServerConfigService extends IService<TProvinceServerC
 
 
     public List<TProvinceServerConfig> select(Object o);
+
+
+    Integer CountByProvince(String provice, String key);
+
+    TProvinceServerConfig selectByIp(String lastIp);
 }

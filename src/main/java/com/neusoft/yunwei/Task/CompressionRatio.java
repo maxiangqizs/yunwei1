@@ -1,9 +1,11 @@
 package com.neusoft.yunwei.Task;
 
 
+import com.neusoft.yunwei.Utils.ConfigDb;
 import com.neusoft.yunwei.Utils.DateUtils;
 import com.neusoft.yunwei.pojo.TDataCompressRatioInd;
 import com.neusoft.yunwei.service.ITDataCompressRatioIndService;
+import com.neusoft.yunwei.service.ITProvinceServerConfigService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,30 +17,24 @@ import java.util.*;
 /**
  * 压缩比 待修改点
  * 1.如何获取45G具体机器数
- * 2.
+ * 2.待码表建立好修改查询
  */
 
 @Slf4j
 @Component
 @RequiredArgsConstructor
 public class CompressionRatio extends TaskInfo{
-    // MySQL 8.0 以下版本 - JDBC 驱动名及数据库 URL
-    static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost:3306/yunwei?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2b8";
-
-    // MySQL 8.0 以上版本 - JDBC 驱动名及数据库 URL
-    //static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    //static final String DB_URL = "jdbc:mysql://localhost:3306/RUNOOB?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
-
-
-    // 数据库的用户名与密码，需要根据自己的设置
-    static final String USER = "root";
-    static final String PASS = "123456";
+    static final String JDBC_DRIVER = ConfigDb.getInstance().getString("jdbc.driver.class");
+    static final String DB_URL = ConfigDb.getInstance().getString("jdbc.connection.url");
+    static final String USER = ConfigDb.getInstance().getString("jdbc.connection.username");
+    static final String PASS = ConfigDb.getInstance().getString("jdbc.connection.password");
 
     Map<String, String> data=new HashMap<>();
 
     @Autowired
     TDataCompressRatioInd tDataCompressRatioInd;
+    @Autowired
+    ITProvinceServerConfigService itProvinceServerConfigService;
     @Autowired
     ITDataCompressRatioIndService itDataCompressRatioIndService;
     public void find() {
@@ -104,15 +100,16 @@ public class CompressionRatio extends TaskInfo{
                         String key=entry.getKey();
                         String value=entry.getValue();
                         System.out.println(key+"->>>"+value);
-
+                        Integer number =itProvinceServerConfigService.CountByProvince(provice,key);
                         tDataCompressRatioInd.setProvince(provice);
                         tDataCompressRatioInd.setTotalBeforeCompress(BeforeCompression);
-//                        Process p = rt.exec("hadoop fs -du -s /warehouse/tablespace/managed/hive/*/hour_id=20221025*|awk -F ' '  '{sum +=$2};END {print sum/1024/1024/1024/1024}'");
+//                       Process p = rt.exec("hadoop fs -du -s /warehouse/tablespace/managed/hive/*/hour_id=20221025*|awk -F ' '  '{sum +=$2};END {print sum/1024/1024/1024/1024}'");
 //                        tDataCompressRatioInd.setTotalAfterCompress(String.valueOf(p));
                         tDataCompressRatioInd.setDataType(key);
                         tDataCompressRatioInd.setBeforeCompress(value);
+/*                        tDataCompressRatioInd.setCompressRatio(Float.valueOf(BeforeCompression)/Float.valueOf(String.valueOf(p)) +"");*/
                         tDataCompressRatioInd.setCheckTime(DateUtils.today());
-                        tDataCompressRatioInd.setProcessPerformance(Float.parseFloat(value)*1024*1024/(24*60*60)/20+"");
+                        tDataCompressRatioInd.setProcessPerformance(Float.parseFloat(value)*1024*1024/(24*60*60)/number+"");
                         System.out.println(Float.parseFloat(value)*1024*1024/(24*60*60)/20+"");
                         itDataCompressRatioIndService.insert(tDataCompressRatioInd);
                         System.out.println("插入成功");
