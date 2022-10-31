@@ -4,6 +4,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/*
+ 功能:读取配置文件jdbc链接
+ author:mxq
+ */
 public class ConfigDb {
     private static ConfigDb configDb;
     private static Properties properties;

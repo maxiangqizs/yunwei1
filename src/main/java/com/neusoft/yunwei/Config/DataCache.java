@@ -10,13 +10,16 @@ import org.springframework.stereotype.Component;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+/*
+ 功能:加载省份码表存入缓存
+ author:mxq
+ */
 @Component
 public class DataCache implements CommandLineRunner {
     @Autowired
     public TProvinceServerConfig tProvinceServerConfig;
 
-    //存储数据
+    //存储原始数据 key:ip,value:TProvinceServerConfig
     public static Map<String,TProvinceServerConfig> dataMaper = new HashMap<>();
 
     //原始数据

@@ -20,4 +20,4 @@ dispatcher:
 #    - cron: "0 0/2 * * * ? "
 #      tasks: ["com.neusoft.yunwei.Task.CheckReport"]
     - cron: "0 0/1 * * * ? "
-      tasks: ["com.neusoft.yunwei.Task.SouthNotUploadData"]
+      tasks: ["com.neusoft.yunwei.Task.FileStatus"]

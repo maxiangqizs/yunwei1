@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- Constants define -->
+    <property name="LOG_HOME" value="logs"></property>
+    <property name="MODULE_NAME" value="yunwei"></property>
+    <!-- Console define -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <Pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] [%logger:%line] --%mdc{client} %msg%n</Pattern>
+        </encoder>
+    </appender>
+    <appender name="DB" class="ch.qos.logback.classic.db.DBAppender">
+        <connectionSource class="ch.qos.logback.core.db.DataSourceConnectionSource">
+            <dataSource class="com.alibaba.druid.pool.DruidDataSource">
+                <driverClassName>com.mysql.jdbc.Driver</driverClassName>
+                <url>jdbc:mysql://localhost:3306/mxq01?useUnicode=true&amp;useSSL=true&amp;characterEncoding=utf8</url>
+                <username>root</username>
+                <password>123456</password>
+            </dataSource>
+        </connectionSource>
+    </appender>
+    <appender name="INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/info.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/bak/${MODULE_NAME}_info_%d{yyyyMMdd}.log</fileNamePattern>
+            <!-- Keep 30 days -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <!-- 只收集WARN级别的日志，其他高级别和低级别的日志都放弃 -->
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] [%logger:%line] --%mdc{client} %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="WARN" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/warn.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/bak/${MODULE_NAME}_warn_%d{yyyyMMdd}.log</fileNamePattern>
+            <!-- Keep 30 days -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <!-- 只收集WARN级别的日志，其他高级别和低级别的日志都放弃 -->
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] [%logger:%line] --%mdc{client} %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/error.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/bak/${MODULE_NAME}_error_%d{yyyyMMdd}.log</fileNamePattern>
+            <!-- Keep 30 days -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <!-- 只收集WARN级别的日志，其他高级别和低级别的日志都放弃 -->
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] [%logger:%line] --%mdc{client} %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="FATAL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/fatal.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/bak/${MODULE_NAME}_fatal_%d{yyyyMMdd}.log</fileNamePattern>
+            <!-- Keep 30 days -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <!-- 只收集WARN级别的日志，其他高级别和低级别的日志都放弃 -->
+            <level>FATAL</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] [%logger:%line] --%mdc{client} %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/debug.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/bak/${MODULE_NAME}_debug_%d{yyyyMMdd}.log</fileNamePattern>
+            <!-- Keep 30 days -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <!-- 只收集WARN级别的日志，其他高级别和低级别的日志都放弃 -->
+            <level>DEBUG</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] [%logger:%line] --%mdc{client} %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Custom level-->
+    <logger name="com.neusoft.yunwei.Task" level="INFO" />
+
+    <!-- Log root -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="DB" />
+        <appender-ref ref="INFO" />
+        <appender-ref ref="WARN" />
+        <appender-ref ref="ERROR" />
+        <appender-ref ref="FATAL" />
+    </root>
+</configuration>
