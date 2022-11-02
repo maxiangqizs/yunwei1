@@ -1,11 +1,10 @@
 package com.neusoft.yunwei.Task;
 
 import com.neusoft.yunwei.Config.AppConfiguration;
+import com.neusoft.yunwei.Config.DataCache;
 import com.neusoft.yunwei.Utils.DateUtils;
-import com.neusoft.yunwei.pojo.DiskStatusAlarmTable;
-import com.neusoft.yunwei.pojo.TProvinceServerConfig;
-import com.neusoft.yunwei.service.IDiskStatusAlarmTableService;
-import com.neusoft.yunwei.service.ITProvinceServerConfigService;
+import com.neusoft.yunwei.pojo.TDiskUseRatioAlr;
+import com.neusoft.yunwei.service.ITDiskUseRatioAlrService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,17 +34,17 @@ public class CheckReport extends TaskInfo {
     @Autowired
     public AppConfiguration appConfiguration;
 
-   @Autowired
-    ITProvinceServerConfigService itProvinceServerConfigService;
     @Autowired
-    IDiskStatusAlarmTableService diskStatusAlarmTableService;
+    DataCache dataCache;
     @Autowired
-    DiskStatusAlarmTable diskStatusAlarmTable;
+    ITDiskUseRatioAlrService iTDiskUseRatioAlrService;
+    @Autowired
+    TDiskUseRatioAlr tDiskUseRatioAlr;
   /*  @RequestMapping("/urlResut")
     @ResponseBody*/
     public void excuteTask(){
         try{
-        File file=new File("E:/bigdata/data/distUse.txt");
+        File file=new File("C:/Users/maxiangqi/Desktop/distUse.txt");
        boolean _printError = false;
        InputStream log = null;
        BufferedReader logBR = null;
@@ -84,22 +83,25 @@ public class CheckReport extends TaskInfo {
                            System.out.println(lastIp);
                            printFlag = false;
                        }
-
                        System.out.println(tmpstr + "% " + head.substring(head.lastIndexOf("/"), head.length()));
-                       TProvinceServerConfig tProvinceServerConfig = itProvinceServerConfigService.selectByIp(lastIp);
-                       provice = tProvinceServerConfig.getProvince();
-                       cluster = tProvinceServerConfig.getCluster();
+
+                       if (dataCache.dataMaper.containsKey(lastIp)){
+                           provice = dataCache.dataMaper.get(lastIp).getProvince();
+                           cluster = dataCache.dataMaper.get(lastIp).getCluster();
+                       } else {
+                           provice ="未知省份";
+                           cluster = "";
+                       }
                        diskName = head.substring(head.lastIndexOf("/"), head.length());
                        diskUsage = tmpstr + "%";
                        time = DateUtils.today();
-                       diskStatusAlarmTable.setCluster(cluster);
-                       diskStatusAlarmTable.setProvince(provice);
-                       diskStatusAlarmTable.setIp(lastIp);
-                       diskStatusAlarmTable.setDiskName(diskName);
-                       diskStatusAlarmTable.setDiskUsage(diskUsage);
-                       diskStatusAlarmTable.setPatrolTime(time);
-                       int count = diskStatusAlarmTableService.insterByIp(diskStatusAlarmTable);
-                       System.out.println("成功插入" + count + "条");
+                       tDiskUseRatioAlr.setCluster(cluster);
+                       tDiskUseRatioAlr.setProvince(provice);
+                       tDiskUseRatioAlr.setIp(lastIp);
+                       tDiskUseRatioAlr.setDiskName(diskName);
+                       tDiskUseRatioAlr.setDiskUse(diskUsage);
+                       tDiskUseRatioAlr.setCheckTime(time);
+                       iTDiskUseRatioAlrService.save(tDiskUseRatioAlr);
                    }
                }
 
