@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.*;
-import java.util.HashMap;
-import java.util.Map;
 
 @Slf4j
 @Component
@@ -23,8 +21,6 @@ public class SouthNotUploadData extends TaskInfo {
     static final String DB_URL = ConfigDb.getInstance().getString("jdbc.connection.url");
     static final String USER = ConfigDb.getInstance().getString("jdbc.connection.username");
     static final String PASS = ConfigDb.getInstance().getString("jdbc.connection.password");
-
-    Map<String, String> data=new HashMap<>();
 
     @Autowired
     TSouthUploadAlr tSouthUploadAlr;

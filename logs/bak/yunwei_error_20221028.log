@@ -1,7 +1,7 @@
-[2022-11-02 14:47:14.959] [ERROR] [org.springframework.boot.SpringApplication:824] -- Application run failed
+[2022-10-27 09:20:34.500] [ERROR] [org.springframework.boot.SpringApplication:824] -- Application run failed
 java.lang.IllegalStateException: java.lang.IllegalStateException: Logback configuration error detected: 
-ERROR in ch.qos.logback.core.joran.action.AppenderRefAction - Could not find an appender named [DB]. Did you define it below instead of above in the configuration file?
-ERROR in ch.qos.logback.core.joran.action.AppenderRefAction - See http://logback.qos.ch/codes.html#appender_order for more details.
+ERROR in ch.qos.logback.core.joran.action.AppenderAction - Could not create an Appender of type [ch.qos.logback.classic.db.DBAppender]. ch.qos.logback.core.util.DynamicClassLoadingException: Failed to instantiate type ch.qos.logback.classic.db.DBAppender
+ERROR in ch.qos.logback.core.joran.spi.Interpreter@12:70 - ActionException in Action for tag [appender] ch.qos.logback.core.joran.spi.ActionException: ch.qos.logback.core.util.DynamicClassLoadingException: Failed to instantiate type ch.qos.logback.classic.db.DBAppender
 	at org.springframework.boot.context.logging.LoggingApplicationListener.initializeSystem(LoggingApplicationListener.java:344)
 	at org.springframework.boot.context.logging.LoggingApplicationListener.initialize(LoggingApplicationListener.java:298)
 	at org.springframework.boot.context.logging.LoggingApplicationListener.onApplicationEnvironmentPreparedEvent(LoggingApplicationListener.java:246)
@@ -22,8 +22,8 @@ ERROR in ch.qos.logback.core.joran.action.AppenderRefAction - See http://logback
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
 	at com.neusoft.yunwei.YunweiApplication.main(YunweiApplication.java:16)
 Caused by: java.lang.IllegalStateException: Logback configuration error detected: 
-ERROR in ch.qos.logback.core.joran.action.AppenderRefAction - Could not find an appender named [DB]. Did you define it below instead of above in the configuration file?
-ERROR in ch.qos.logback.core.joran.action.AppenderRefAction - See http://logback.qos.ch/codes.html#appender_order for more details.
+ERROR in ch.qos.logback.core.joran.action.AppenderAction - Could not create an Appender of type [ch.qos.logback.classic.db.DBAppender]. ch.qos.logback.core.util.DynamicClassLoadingException: Failed to instantiate type ch.qos.logback.classic.db.DBAppender
+ERROR in ch.qos.logback.core.joran.spi.Interpreter@12:70 - ActionException in Action for tag [appender] ch.qos.logback.core.joran.spi.ActionException: ch.qos.logback.core.util.DynamicClassLoadingException: Failed to instantiate type ch.qos.logback.classic.db.DBAppender
 	at org.springframework.boot.logging.logback.LogbackLoggingSystem.loadConfiguration(LogbackLoggingSystem.java:179)
 	at org.springframework.boot.logging.logback.LogbackLoggingSystem.reinitialize(LogbackLoggingSystem.java:232)
 	at org.springframework.boot.logging.AbstractLoggingSystem.initializeWithConventions(AbstractLoggingSystem.java:73)
@@ -31,10 +31,10 @@ ERROR in ch.qos.logback.core.joran.action.AppenderRefAction - See http://logback
 	at org.springframework.boot.logging.logback.LogbackLoggingSystem.initialize(LogbackLoggingSystem.java:132)
 	at org.springframework.boot.context.logging.LoggingApplicationListener.initializeSystem(LoggingApplicationListener.java:329)
 	... 18 common frames omitted
-[2022-11-02 14:48:03.503] [ERROR] [org.springframework.boot.SpringApplication:824] -- Application run failed
+[2022-10-27 09:50:58.917] [ERROR] [org.springframework.boot.SpringApplication:824] -- Application run failed
 java.lang.IllegalStateException: java.lang.IllegalStateException: Logback configuration error detected: 
-ERROR in ch.qos.logback.core.joran.action.AppenderRefAction - Could not find an appender named [DB]. Did you define it below instead of above in the configuration file?
-ERROR in ch.qos.logback.core.joran.action.AppenderRefAction - See http://logback.qos.ch/codes.html#appender_order for more details.
+ERROR in ch.qos.logback.core.joran.action.AppenderAction - Could not create an Appender of type [ch.qos.logback.classic.db.DBAppender]. ch.qos.logback.core.util.DynamicClassLoadingException: Failed to instantiate type ch.qos.logback.classic.db.DBAppender
+ERROR in ch.qos.logback.core.joran.spi.Interpreter@12:70 - ActionException in Action for tag [appender] ch.qos.logback.core.joran.spi.ActionException: ch.qos.logback.core.util.DynamicClassLoadingException: Failed to instantiate type ch.qos.logback.classic.db.DBAppender
 	at org.springframework.boot.context.logging.LoggingApplicationListener.initializeSystem(LoggingApplicationListener.java:344)
 	at org.springframework.boot.context.logging.LoggingApplicationListener.initialize(LoggingApplicationListener.java:298)
 	at org.springframework.boot.context.logging.LoggingApplicationListener.onApplicationEnvironmentPreparedEvent(LoggingApplicationListener.java:246)
@@ -55,8 +55,8 @@ ERROR in ch.qos.logback.core.joran.action.AppenderRefAction - See http://logback
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
 	at com.neusoft.yunwei.YunweiApplication.main(YunweiApplication.java:16)
 Caused by: java.lang.IllegalStateException: Logback configuration error detected: 
-ERROR in ch.qos.logback.core.joran.action.AppenderRefAction - Could not find an appender named [DB]. Did you define it below instead of above in the configuration file?
-ERROR in ch.qos.logback.core.joran.action.AppenderRefAction - See http://logback.qos.ch/codes.html#appender_order for more details.
+ERROR in ch.qos.logback.core.joran.action.AppenderAction - Could not create an Appender of type [ch.qos.logback.classic.db.DBAppender]. ch.qos.logback.core.util.DynamicClassLoadingException: Failed to instantiate type ch.qos.logback.classic.db.DBAppender
+ERROR in ch.qos.logback.core.joran.spi.Interpreter@12:70 - ActionException in Action for tag [appender] ch.qos.logback.core.joran.spi.ActionException: ch.qos.logback.core.util.DynamicClassLoadingException: Failed to instantiate type ch.qos.logback.classic.db.DBAppender
 	at org.springframework.boot.logging.logback.LogbackLoggingSystem.loadConfiguration(LogbackLoggingSystem.java:179)
 	at org.springframework.boot.logging.logback.LogbackLoggingSystem.reinitialize(LogbackLoggingSystem.java:232)
 	at org.springframework.boot.logging.AbstractLoggingSystem.initializeWithConventions(AbstractLoggingSystem.java:73)
@@ -64,10 +64,10 @@ ERROR in ch.qos.logback.core.joran.action.AppenderRefAction - See http://logback
 	at org.springframework.boot.logging.logback.LogbackLoggingSystem.initialize(LogbackLoggingSystem.java:132)
 	at org.springframework.boot.context.logging.LoggingApplicationListener.initializeSystem(LoggingApplicationListener.java:329)
 	... 18 common frames omitted
-[2022-11-02 14:49:06.501] [ERROR] [org.springframework.boot.SpringApplication:824] -- Application run failed
+[2022-10-27 09:54:30.115] [ERROR] [org.springframework.boot.SpringApplication:824] -- Application run failed
 java.lang.IllegalStateException: java.lang.IllegalStateException: Logback configuration error detected: 
-ERROR in ch.qos.logback.core.joran.action.AppenderRefAction - Could not find an appender named [DB]. Did you define it below instead of above in the configuration file?
-ERROR in ch.qos.logback.core.joran.action.AppenderRefAction - See http://logback.qos.ch/codes.html#appender_order for more details.
+ERROR in ch.qos.logback.core.joran.action.AppenderAction - Could not create an Appender of type [ch.qos.logback.classic.db.DBAppender]. ch.qos.logback.core.util.DynamicClassLoadingException: Failed to instantiate type ch.qos.logback.classic.db.DBAppender
+ERROR in ch.qos.logback.core.joran.spi.Interpreter@12:70 - ActionException in Action for tag [appender] ch.qos.logback.core.joran.spi.ActionException: ch.qos.logback.core.util.DynamicClassLoadingException: Failed to instantiate type ch.qos.logback.classic.db.DBAppender
 	at org.springframework.boot.context.logging.LoggingApplicationListener.initializeSystem(LoggingApplicationListener.java:344)
 	at org.springframework.boot.context.logging.LoggingApplicationListener.initialize(LoggingApplicationListener.java:298)
 	at org.springframework.boot.context.logging.LoggingApplicationListener.onApplicationEnvironmentPreparedEvent(LoggingApplicationListener.java:246)
@@ -88,8 +88,8 @@ ERROR in ch.qos.logback.core.joran.action.AppenderRefAction - See http://logback
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
 	at com.neusoft.yunwei.YunweiApplication.main(YunweiApplication.java:16)
 Caused by: java.lang.IllegalStateException: Logback configuration error detected: 
-ERROR in ch.qos.logback.core.joran.action.AppenderRefAction - Could not find an appender named [DB]. Did you define it below instead of above in the configuration file?
-ERROR in ch.qos.logback.core.joran.action.AppenderRefAction - See http://logback.qos.ch/codes.html#appender_order for more details.
+ERROR in ch.qos.logback.core.joran.action.AppenderAction - Could not create an Appender of type [ch.qos.logback.classic.db.DBAppender]. ch.qos.logback.core.util.DynamicClassLoadingException: Failed to instantiate type ch.qos.logback.classic.db.DBAppender
+ERROR in ch.qos.logback.core.joran.spi.Interpreter@12:70 - ActionException in Action for tag [appender] ch.qos.logback.core.joran.spi.ActionException: ch.qos.logback.core.util.DynamicClassLoadingException: Failed to instantiate type ch.qos.logback.classic.db.DBAppender
 	at org.springframework.boot.logging.logback.LogbackLoggingSystem.loadConfiguration(LogbackLoggingSystem.java:179)
 	at org.springframework.boot.logging.logback.LogbackLoggingSystem.reinitialize(LogbackLoggingSystem.java:232)
 	at org.springframework.boot.logging.AbstractLoggingSystem.initializeWithConventions(AbstractLoggingSystem.java:73)

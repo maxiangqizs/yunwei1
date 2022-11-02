@@ -53,7 +53,7 @@ public class CompressionRatio extends TaskInfo{
 
             // 执行查询
             System.out.println(" 实例化Statement对象...");
-            String sqlconfig = "select ip,my_sql_url,port from T_mysql_url_config ";
+            String sqlconfig = "select ip,mysql_dbname,port from T_mysql_url_config ";
             prepare = conn.prepareStatement(sqlconfig);
             ResultSet rs = prepare.executeQuery();
             Runtime rt = Runtime.getRuntime();
@@ -63,7 +63,7 @@ public class CompressionRatio extends TaskInfo{
 
            while (rs.next()) {
                 String ip = rs.getString("ip");
-                String my_sql_name = rs.getString("my_sql_url");
+                String my_sql_name = rs.getString("mysql_dbname");
                 String port = rs.getString("port");
                 String DB_URL1 = "jdbc:mysql://"+ ip +":"+ port +"/"+my_sql_name+"?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
                 conn1 = DriverManager.getConnection(DB_URL1,USER,PASS);

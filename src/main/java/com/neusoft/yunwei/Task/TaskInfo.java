@@ -1,15 +1,14 @@
 package com.neusoft.yunwei.Task;
 
+import org.quartz.Job;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
-
-
-import org.quartz.Job;
-import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
 
 
 public abstract class TaskInfo implements Job{
@@ -59,18 +58,18 @@ public abstract class TaskInfo implements Job{
 	public void setSleepMin(Integer sleepMin) {
 		this.sleepMin = sleepMin;
 	}
-	public void run(){
+	public void run() {
 		setTaskState(1);
 		setNextRunTime();
 		monitorResult.add(this);
 		this.setExcuteThread(Thread.currentThread());
-//		try{
-//		throw new RuntimeException("");
-//		}catch(Exception e){
-//			e.printStackTrace();
-//		}
-		excuteTask();
-		setTaskState(0);
+		try{
+			excuteTask();
+			setTaskState(0);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+
 	};
 	 public static String printStr(Object[] a) {
 	        if (a == null)
