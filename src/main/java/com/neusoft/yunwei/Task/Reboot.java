@@ -179,6 +179,7 @@ public class Reboot extends TaskInfo {
                 //开始下一次循环
                 head = logBR.readLine();
             }
+            String head1 = null;
 
         }catch (Exception e){
 
