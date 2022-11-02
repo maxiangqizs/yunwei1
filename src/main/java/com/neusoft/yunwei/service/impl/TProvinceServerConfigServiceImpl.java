@@ -37,5 +37,15 @@ public class TProvinceServerConfigServiceImpl extends ServiceImpl<TProvinceServe
         return tProvinceServerConfigMapper.select(lastIp);
     }
 
+    @Override
+    public List<String> selectByProvince(String provice,String cluster) {
+        return tProvinceServerConfigMapper.selectByProvices(provice,cluster);
+    }
+
+    @Override
+    public List<String> selectProvince() {
+        return tProvinceServerConfigMapper.selectProvince();
+    }
+
 
 }

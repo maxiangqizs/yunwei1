@@ -69,8 +69,13 @@ public abstract class TaskInfo implements Job{
 //		}catch(Exception e){
 //			e.printStackTrace();
 //		}
-		excuteTask();
-		setTaskState(0);
+		try {
+			excuteTask();
+			setTaskState(0);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+
 	};
 	 public static String printStr(Object[] a) {
 	        if (a == null)

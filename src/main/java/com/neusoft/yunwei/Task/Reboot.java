@@ -33,7 +33,7 @@ public class Reboot extends TaskInfo {
                     head = logBR.readLine();
                     if (head == null) {
                         logBR.close();
-                        return;
+                        break;
                     }
                 }
 
@@ -69,6 +69,7 @@ public class Reboot extends TaskInfo {
 
                 head = logBR.readLine();
             }
+            String head1 = null;
 
         }catch (Exception e){
 
