@@ -3,6 +3,7 @@ package com.neusoft.yunwei.Task;
 import com.neusoft.yunwei.Config.AppConfiguration;
 import com.neusoft.yunwei.Config.DataCache;
 import com.neusoft.yunwei.Utils.DateUtils;
+import com.neusoft.yunwei.Utils.LogUtil;
 import com.neusoft.yunwei.pojo.TDiskUseRatioAlr;
 import com.neusoft.yunwei.service.ITDiskUseRatioAlrService;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +32,9 @@ public class CheckReport extends TaskInfo {
     public String diskUsage;
     public String time;
 
+    //记录日志工具
+    @Autowired
+    LogUtil logUtil;
     @Autowired
     public AppConfiguration appConfiguration;
 
@@ -40,8 +44,8 @@ public class CheckReport extends TaskInfo {
     ITDiskUseRatioAlrService iTDiskUseRatioAlrService;
     @Autowired
     TDiskUseRatioAlr tDiskUseRatioAlr;
-  /*  @RequestMapping("/urlResut")
-    @ResponseBody*/
+
+    @Override
     public void excuteTask(){
         try{
         File file=new File("C:/Users/maxiangqi/Desktop/distUse.txt");
@@ -60,7 +64,7 @@ public class CheckReport extends TaskInfo {
                head = logBR.readLine();
                if (head == null) {
                    logBR.close();
-                   return;
+                   break;
                }
            }
 
@@ -111,6 +115,8 @@ public class CheckReport extends TaskInfo {
        }}catch(Exception e){
             e.printStackTrace();
         }
+        logUtil.toDb("CheckReport","success");
+
    }
 
 

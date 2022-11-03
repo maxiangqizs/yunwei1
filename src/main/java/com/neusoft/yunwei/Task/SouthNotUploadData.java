@@ -3,6 +3,7 @@ package com.neusoft.yunwei.Task;
 import com.neusoft.yunwei.Config.DataCache;
 import com.neusoft.yunwei.Utils.ConfigDb;
 import com.neusoft.yunwei.Utils.DateUtils;
+import com.neusoft.yunwei.Utils.LogUtil;
 import com.neusoft.yunwei.pojo.TSouthUploadAlr;
 import com.neusoft.yunwei.service.ITSouthUploadAlrService;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,9 @@ public class SouthNotUploadData extends TaskInfo {
     static final String DB_URL = ConfigDb.getInstance().getString("jdbc.connection.url");
     static final String USER = ConfigDb.getInstance().getString("jdbc.connection.username");
     static final String PASS = ConfigDb.getInstance().getString("jdbc.connection.password");
-
+    //记录日志工具
+    @Autowired
+    LogUtil logUtil;
     @Autowired
     TSouthUploadAlr tSouthUploadAlr;
 
@@ -124,6 +127,7 @@ public class SouthNotUploadData extends TaskInfo {
             rs.close();
             prepare.close();
             conn.close();
+            logUtil.toDb("SouthNotUploadData","success");
         }catch(SQLException se){
             // 处理 JDBC 错误
             se.printStackTrace();

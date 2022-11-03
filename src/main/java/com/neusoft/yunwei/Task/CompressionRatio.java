@@ -3,6 +3,7 @@ package com.neusoft.yunwei.Task;
 
 import com.neusoft.yunwei.Utils.ConfigDb;
 import com.neusoft.yunwei.Utils.DateUtils;
+import com.neusoft.yunwei.Utils.LogUtil;
 import com.neusoft.yunwei.pojo.TDataCompressRatioInd;
 import com.neusoft.yunwei.service.ITDataCompressRatioIndService;
 import com.neusoft.yunwei.service.ITProvinceServerConfigService;
@@ -12,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.*;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * 压缩比 待修改点
@@ -31,6 +34,9 @@ public class CompressionRatio extends TaskInfo{
 
     Map<String, String> data=new HashMap<>();
 
+    //记录日志工具
+    @Autowired
+    LogUtil logUtil;
     @Autowired
     TDataCompressRatioInd tDataCompressRatioInd;
     @Autowired
@@ -128,6 +134,7 @@ public class CompressionRatio extends TaskInfo{
             rs.close();
             prepare.close();
             conn.close();
+            logUtil.toDb("CompressionRatio","success");
         }catch(SQLException se){
             // 处理 JDBC 错误
             se.printStackTrace();

@@ -2,6 +2,7 @@ package com.neusoft.yunwei.Task;
 
 import com.neusoft.yunwei.Config.DataCache;
 import com.neusoft.yunwei.Utils.DateUtils;
+import com.neusoft.yunwei.Utils.LogUtil;
 import com.neusoft.yunwei.pojo.TServerStatusInd;
 import com.neusoft.yunwei.service.ITServerStatusIndService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,9 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.*;
-
+/*
+功能:设备重启和负载均衡
+ */
 public class Reboot extends TaskInfo {
     //存储数据map
     Map<String, TServerStatusInd> alldata = new HashMap<>();
@@ -23,6 +26,10 @@ public class Reboot extends TaskInfo {
 
     @Autowired
     ITServerStatusIndService iTServerStatusIndService;
+
+    //记录日志工具
+    @Autowired
+    LogUtil logUtil;
 
     //存储ip和对应的硬盘使用率
     Map<String, TreeSet<Integer>> diskdata = new HashMap<>();
@@ -209,6 +216,7 @@ public class Reboot extends TaskInfo {
             list.add(tServerStatusInd);
         }
         iTServerStatusIndService.saveBatch(list);
+        logUtil.toDb("Reboot","success");
     }
     @Override
     public void excuteTask(){

@@ -4,6 +4,7 @@ package com.neusoft.yunwei.Task;
 import com.neusoft.yunwei.Config.DataCache;
 import com.neusoft.yunwei.Utils.ConfigDb;
 import com.neusoft.yunwei.Utils.DateUtils;
+import com.neusoft.yunwei.Utils.LogUtil;
 import com.neusoft.yunwei.pojo.TMysqlConnectInd;
 import com.neusoft.yunwei.service.ITMysqlConnectIndService;
 import org.slf4j.Logger;
@@ -31,6 +32,9 @@ public class MySqlConnect extends TaskInfo {
     String port ;
     String province;
     String cluster ;
+    //记录日志工具
+    @Autowired
+    LogUtil logUtil;
     //缓存的省份码表
     @Autowired
     DataCache dataCache;
@@ -51,7 +55,6 @@ public class MySqlConnect extends TaskInfo {
 
             // 打开链接
             System.out.println("连接数据库...");
-            logger.info("=========Hello=======");
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
 
             // 执行查询
@@ -96,6 +99,7 @@ public class MySqlConnect extends TaskInfo {
             rs.close();
             prepare.close();
             conn.close();
+            logUtil.toDb("MySqlConnect","success");
         }catch(SQLException se){
             // 处理 JDBC 错误
             tMysqlConnectInd.setProvince(province);
@@ -103,7 +107,6 @@ public class MySqlConnect extends TaskInfo {
             tMysqlConnectInd.setMysqlClusterConnect("0");
             tMysqlConnectInd.setCheckTime(DateUtils.today());
             itMysqlConnectIndService.save(tMysqlConnectInd);
-            logger.info("=========Hello======="+ se);
             se.printStackTrace();
         }catch(Exception e){
             // 处理 Class.forName 错误

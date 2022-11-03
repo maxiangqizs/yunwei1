@@ -3,6 +3,7 @@ package com.neusoft.yunwei.Task;
 import com.neusoft.yunwei.Config.DataCache;
 import com.neusoft.yunwei.Utils.ConfigDb;
 import com.neusoft.yunwei.Utils.DateUtils;
+import com.neusoft.yunwei.Utils.LogUtil;
 import com.neusoft.yunwei.pojo.TFileStatusInd;
 import com.neusoft.yunwei.service.ITFileStatusIndService;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,9 @@ public class FileStatus extends TaskInfo {
     static final String PASS = ConfigDb.getInstance().getString("jdbc.connection.password");
 
     Map<String, String> data=new HashMap<>();
-
+    //记录日志工具
+    @Autowired
+    LogUtil logUtil;
     @Autowired
     TFileStatusInd tFileStatusInd;
 
@@ -119,6 +122,7 @@ public class FileStatus extends TaskInfo {
             rs.close();
             prepare.close();
             conn.close();
+            logUtil.toDb("FileStatus","success");
         }catch(SQLException se){
             // 处理 JDBC 错误
             se.printStackTrace();

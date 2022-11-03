@@ -5,9 +5,13 @@ import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
 import com.neusoft.yunwei.Utils.ConfigDb;
+import com.neusoft.yunwei.Utils.DateUtils;
+import com.neusoft.yunwei.Utils.LogUtil;
 import com.neusoft.yunwei.pojo.TSftpConfig;
+import com.neusoft.yunwei.pojo.TSftpConnectAlr;
 import com.neusoft.yunwei.service.ITProvinceServerConfigService;
 import com.neusoft.yunwei.service.ITSftpConfigService;
+import com.neusoft.yunwei.service.ITSftpConnectAlrService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,10 +21,17 @@ import java.util.Properties;
 @Slf4j
 public class SftpConnectivity extends TaskInfo {
 
+    //记录日志工具
+    @Autowired
+    LogUtil logUtil;
     @Autowired
     ITProvinceServerConfigService itProvinceServerConfigService;
     @Autowired
     ITSftpConfigService itSftpConfigService;
+    @Autowired
+    TSftpConnectAlr tSftpConnectAlr;
+    @Autowired
+    ITSftpConnectAlrService itSftpConnectAlrService;
     static final String PORT = ConfigDb.getInstance().getString("sftp.connection.port");
     public void SftpConnectivity(){
         String username;
@@ -38,8 +49,10 @@ public class SftpConnectivity extends TaskInfo {
                 password = tSftpConfig.getPassword();
                 System.out.println(username + "  " + password);
                 connect(province,username,password);
+
             }
         }
+
     }
 
 
@@ -49,36 +62,35 @@ public class SftpConnectivity extends TaskInfo {
      *
      * @return
      */
-    public ChannelSftp connect(String provice, String username, String password) {
+    public void connect(String provice, String username, String password) {
         JSch jSch = new JSch();
         Session session = null;
         ChannelSftp sftp = null;
-
         List<String> select = itProvinceServerConfigService.selectByProvince(provice,"南向");
         ListIterator<String> ip = select.listIterator();
         while (ip.hasNext()){
             try {
-                System.out.println(ip.next());
+                tSftpConnectAlr.setIp(ip.next());
+                tSftpConnectAlr.setProvince(provice);
+                tSftpConnectAlr.setCheckTime(DateUtils.today());
                 session = jSch.getSession(username, ip.next(), Integer.parseInt(PORT));
                 session.setPassword(password);
                 session.setConfig(this.getSshConfig());
                 session.connect();
-
                 sftp = (ChannelSftp)session.openChannel("sftp");
                 sftp.connect();
-
                 log.error("结果："+session.equals(sftp.getSession()));
                 log.info("登录成功:" + sftp.getServerVersion());
             }catch (Exception e) {
+                itSftpConnectAlrService.save(tSftpConnectAlr);
                 log.error("SSH方式连接FTP服务器时有JSchException异常!", e);
-                return null;
             }finally {
                 disconnect(sftp);
             }
 
 
         }
-        return sftp;
+        logUtil.toDb("SftpConnectivity","success");
     }
 
     /**

@@ -1,6 +1,7 @@
 package com.neusoft.yunwei.Task;
 
 import com.neusoft.yunwei.Utils.DateUtils;
+import com.neusoft.yunwei.Utils.LogUtil;
 import com.neusoft.yunwei.pojo.TOverStockAlr;
 import com.neusoft.yunwei.pojo.TProvinceServerConfig;
 import com.neusoft.yunwei.service.ITOverStockAlrService;
@@ -11,6 +12,9 @@ import java.io.*;
 
 public class Overstock extends TaskInfo {
 
+    //记录日志工具
+    @Autowired
+    LogUtil logUtil;
     @Autowired
     ITOverStockAlrService itOverStockAlrService;
     @Autowired
@@ -20,7 +24,7 @@ public class Overstock extends TaskInfo {
     ITProvinceServerConfigService itProvinceServerConfigService;
     public  void Overstock(){
         try {
-            File file=new File("E:/bigdata/data/jy.txt");
+            File file=new File("C:/Users/maxiangqi/Desktop/jy.txt");
             {
 
                 int MAX_SIZE = 20;
@@ -109,6 +113,7 @@ public class Overstock extends TaskInfo {
 
                         head = logBR.readLine();
                     }
+                    logUtil.toDb("Overstock","success");
                 } catch (FileNotFoundException var23) {
                     var23.printStackTrace();
                 } catch (IOException var24) {
