@@ -67,6 +67,7 @@ public class FileIntegrityAlert extends TaskInfo{
                 String endDay = LocalDateTime.now().plusDays(-2).format(DateTimeFormatter.ofPattern("yyyyMMdd"))+"240000";
                 BigDecimal failNum = new BigDecimal(0);
                 BigDecimal allNum = new BigDecimal(0);
+                BigDecimal value = new BigDecimal(0);
                 String sql1;
                 sql1 = "select count(distinct data_file_name) as countNum, '校验失败文件数' as fail_type from log_store_file_info where check_state=1 and file_time >=${startDay} and file_time <${endDay}\n" +
                         "union all\n" +
@@ -119,12 +120,19 @@ public class FileIntegrityAlert extends TaskInfo{
                 }
                 tSouthFileProcessAlr.setProvince(province);
                 tSouthFileProcessAlr.setCheckTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")));
-                tSouthFileProcessAlr.setCompleteRatio(failNum.divide(allNum).setScale(BigDecimal.ROUND_HALF_UP,2));
+                if (failNum.toString().equals("0")||allNum.toString().equals("0")) {
+                    tSouthFileProcessAlr.setCompleteRatio(value);
+                } else {
+                    tSouthFileProcessAlr.setCompleteRatio(failNum.divide(allNum).setScale(BigDecimal.ROUND_HALF_UP,2));
+                }
                 rs1.close();
                 prepare1.close();
                 conn1.close();
             }
-            itSouthFileProcessAlrService.save(tSouthFileProcessAlr);
+        if (tSouthFileProcessAlr!=null) {
+                itSouthFileProcessAlrService.save(tSouthFileProcessAlr);
+            }
+
             // 完成后关闭
             rs.close();
             prepare.close();

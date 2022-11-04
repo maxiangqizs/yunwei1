@@ -107,7 +107,8 @@
 
     <!-- Custom level-->
     <logger name="com.neusoft.yunwei" level="INFO" />
-
+    <!-- mybatis打印sql配置，可以指定到类，如果开启了sql插件这里就不用单独配置 -->
+    <logger name="com.neusoft.yunwei.mapper" level="error" additivity="true" />
     <!-- Log root -->
     <root level="INFO">
         <appender-ref ref="CONSOLE" />

@@ -35,21 +35,21 @@ yunwei:
     #      tasks: ["com.neusoft.yunwei.Task.SftpConnectivity"]
     #    - cron: "0 0 12 * * ?"
     #      tasks: ["com.neusoft.yunwei.Task.SouthNotUploadData"]
-#    - cron: "0 0/2 * * * ? "
+#    - cron: "0 0/5 * * * ? "
 #      tasks: ["com.neusoft.yunwei.Task.CheckReport"]
-#    - cron: "0 0/2 * * * ? "
-#      tasks: ["com.neusoft.yunwei.Task.CompressionRatio"]
-#    - cron: "0 0/2 * * * ? "
-#      tasks: ["com.neusoft.yunwei.Task.FileIntegrityAlert"]
-#    - cron: "0 0/2 * * * ? "
+    - cron: "0 0/2 * * * ? "
+      tasks: ["com.neusoft.yunwei.Task.CompressionRatio"]
+    - cron: "0 0/2 * * * ? "
+      tasks: ["com.neusoft.yunwei.Task.FileIntegrityAlert"]
+#    - cron: "0 0/5 * * * ? "
 #      tasks: ["com.neusoft.yunwei.Task.FileStatus"]
-#    - cron: "0 0/2 * * * ? "
+#    - cron: "0 0/5 * * * ? "
 #      tasks: ["com.neusoft.yunwei.Task.MySqlConnect"]
-#    - cron: "0 0/2 * * * ? "
+#    - cron: "0 0/5 * * * ? "
 #      tasks: ["com.neusoft.yunwei.Task.Overstock"]
-#    - cron: "0 0/2 * * * ? "
+#    - cron: "0 0/5 * * * ? "
 #      tasks: ["com.neusoft.yunwei.Task.Reboot"]
-     - cron: "0 0/2 * * * ?"
-       tasks: ["com.neusoft.yunwei.Task.SftpConnectivity"]
-#    - cron: "0 0/2 * * * ?"
+#    - cron: "0 0/5 * * * ?"
+#      tasks: ["com.neusoft.yunwei.Task.SftpConnectivity"]
+#    - cron: "0 0/5 * * * ?"
 #      tasks: ["com.neusoft.yunwei.Task.SouthNotUploadData"]

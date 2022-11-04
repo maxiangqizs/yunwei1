@@ -57,6 +57,24 @@ public class SftpConnectivity extends TaskInfo {
 
 
 
+    /*
+      增加方法
+      判断sftp是否连接成功
+     */
+    public String sessionConnect(Session session)  {
+        String flag = "sucess";
+        ChannelSftp sftp = null;
+        try{
+            session.connect();
+            sftp = (ChannelSftp)session.openChannel("sftp");
+            sftp.connect();
+        } catch (Exception e) {
+            flag = "fail";
+        }finally {
+            disconnect(sftp);
+        }
+        return flag;
+    }
     /**
      * 连接登陆远程服务器
      *
@@ -65,7 +83,6 @@ public class SftpConnectivity extends TaskInfo {
     public void connect(String provice, String username, String password) {
         JSch jSch = new JSch();
         Session session = null;
-        ChannelSftp sftp = null;
         List<String> select = itProvinceServerConfigService.selectByProvince(provice,"南向");
         ListIterator<String> ip = select.listIterator();
         while (ip.hasNext()){
@@ -76,16 +93,19 @@ public class SftpConnectivity extends TaskInfo {
                 session = jSch.getSession(username, ip.next(), Integer.parseInt(PORT));
                 session.setPassword(password);
                 session.setConfig(this.getSshConfig());
-                session.connect();
-                sftp = (ChannelSftp)session.openChannel("sftp");
-                sftp.connect();
-                log.error("结果："+session.equals(sftp.getSession()));
-                log.info("登录成功:" + sftp.getServerVersion());
+//                session.connect();
+//                sftp = (ChannelSftp)session.openChannel("sftp");
+//                sftp.connect();
+                //判断连接是否成功
+                String flag=sessionConnect(session);
+                //如果失败产生告警
+                if (flag.equals("fail")) {
+                    itSftpConnectAlrService.save(tSftpConnectAlr);
+                } else {
+                    log.info("sftp登录成功");
+                }
             }catch (Exception e) {
-                itSftpConnectAlrService.save(tSftpConnectAlr);
                 log.error("SSH方式连接FTP服务器时有JSchException异常!", e);
-            }finally {
-                disconnect(sftp);
             }
 
 

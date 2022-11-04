@@ -1,5 +1,6 @@
 package com.neusoft.yunwei.Task;
 
+import com.neusoft.yunwei.Utils.ConfigDb;
 import com.neusoft.yunwei.Utils.DateUtils;
 import com.neusoft.yunwei.Utils.LogUtil;
 import com.neusoft.yunwei.pojo.TOverStockAlr;
@@ -24,9 +25,8 @@ public class Overstock extends TaskInfo {
     ITProvinceServerConfigService itProvinceServerConfigService;
     public  void Overstock(){
         try {
-            File file=new File("C:/Users/maxiangqi/Desktop/jy.txt");
+            File file=new File(ConfigDb.getInstance().getString("file.jy.path"));
             {
-
                 int MAX_SIZE = 20;
                 InputStream log = null;
                 BufferedReader logBR = null;

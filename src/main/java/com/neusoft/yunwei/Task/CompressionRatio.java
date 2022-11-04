@@ -52,21 +52,15 @@ public class CompressionRatio extends TaskInfo{
         try{
             // 注册 JDBC 驱动
             Class.forName(JDBC_DRIVER);
-
             // 打开链接
             System.out.println("连接数据库...");
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
-
             // 执行查询
             System.out.println(" 实例化Statement对象...");
             String sqlconfig = "select ip,mysql_dbname,port from T_mysql_url_config ";
             prepare = conn.prepareStatement(sqlconfig);
             ResultSet rs = prepare.executeQuery();
             Runtime rt = Runtime.getRuntime();
-
-
-
-
            while (rs.next()) {
                 String ip = rs.getString("ip");
                 String my_sql_name = rs.getString("mysql_dbname");
@@ -78,10 +72,10 @@ public class CompressionRatio extends TaskInfo{
                         "biz_code like '4G%' or biz_code like '24IOT%' or \n" +
                         "biz_code like 'GM%' then size_mb else 0 end)/1024/1024 as '4g压缩前' ,\n" +
                         "sum(case when biz_code like '5G%'then size_mb else 0 end)/1024/1024 as '5g压缩前',\n" +
-                        "b.provice\n" +
-                        "from log_metrics a  inner join t_province_server_config b on a.ip=b.ip  \n" +
+                        "b.province\n" +
+                        "from log_metrics a  inner join t_province_server_config b on a.ip=b.business_ip  \n" +
                         "where stage='read' and log_time >= '" + DateUtils.lastday() +"' AND log_time < '"+ DateUtils.today()+"'\n" +
-                        "group by b.provice;";
+                        "group by b.province;";
 
                 prepare1 = conn1.prepareStatement(sql1);
 
@@ -93,7 +87,7 @@ public class CompressionRatio extends TaskInfo{
                     String BeforeCompression = rs1.getString("压缩前");
                     String demo1 = rs1.getString("4g压缩前");
                     String demo2 = rs1.getString("5g压缩前");
-                    String provice = rs1.getString("provice");
+                    String provice = rs1.getString("province");
                     String totalAfterCompress = null;
                     String count = null;
                     data.put("4G",demo1);

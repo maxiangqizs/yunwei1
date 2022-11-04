@@ -2,6 +2,7 @@ package com.neusoft.yunwei.Task;
 
 import com.neusoft.yunwei.Config.AppConfiguration;
 import com.neusoft.yunwei.Config.DataCache;
+import com.neusoft.yunwei.Utils.ConfigDb;
 import com.neusoft.yunwei.Utils.DateUtils;
 import com.neusoft.yunwei.Utils.LogUtil;
 import com.neusoft.yunwei.pojo.TDiskUseRatioAlr;
@@ -48,7 +49,7 @@ public class CheckReport extends TaskInfo {
     @Override
     public void excuteTask(){
         try{
-        File file=new File("C:/Users/maxiangqi/Desktop/distUse.txt");
+        File file=new File(ConfigDb.getInstance().getString("file.disk.path"));
        boolean _printError = false;
        InputStream log = null;
        BufferedReader logBR = null;

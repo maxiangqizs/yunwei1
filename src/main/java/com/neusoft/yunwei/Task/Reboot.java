@@ -1,6 +1,7 @@
 package com.neusoft.yunwei.Task;
 
 import com.neusoft.yunwei.Config.DataCache;
+import com.neusoft.yunwei.Utils.ConfigDb;
 import com.neusoft.yunwei.Utils.DateUtils;
 import com.neusoft.yunwei.Utils.LogUtil;
 import com.neusoft.yunwei.pojo.TServerStatusInd;
@@ -132,7 +133,7 @@ public class Reboot extends TaskInfo {
     //设备重启
     public void Reboot(){
         try{
-            File file=new File("C:/Users/maxiangqi/Desktop/reboot1.txt");
+            File file=new File(ConfigDb.getInstance().getString("file.root.path"));
             Calendar calendar = Calendar.getInstance();
             calendar.set(5, calendar.get(5) - 1);
             calendar.set(11, 0);
