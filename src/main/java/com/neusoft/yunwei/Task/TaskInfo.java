@@ -22,7 +22,7 @@ public abstract class TaskInfo implements Job{
 	private Integer sleepMin;
 	private Calendar cr=new GregorianCalendar();
 	private Thread excuteThread;
-	
+
 	public int getTaskState() {
 		return taskState;
 	}

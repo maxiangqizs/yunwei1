@@ -82,7 +82,7 @@ public class Reboot extends TaskInfo {
     //负载均衡
     public void loadBalance(){
         try{
-            File file=new File("C:/Users/maxiangqi/Desktop/distUse.txt");
+            File file=new File(ConfigDb.getInstance().getString("file.disk.path"));
             BufferedReader logBR = null;
             logBR = new BufferedReader(new InputStreamReader(new FileInputStream(file )));
             String lastIp = null;
