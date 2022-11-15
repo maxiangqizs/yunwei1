@@ -4,8 +4,8 @@ spring:
   datasource:
     #    url: jdbc:mysql://10.4.66.80:3306/anti_transmission_yn?useUnicode=true&characterEncoding=UTF-8&useSSL=false
     username: root
-    password: 123456
-    url: jdbc:mysql://localhost:3306/mxq01?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2b8
+    password:
+    url: jdbc:mysql://10.4.114.82:3306/admin_v1?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2b8
     driver-class-name: com.mysql.cj.jdbc.Driver
 #mybatis-plus:
 #  configuration:
@@ -15,29 +15,27 @@ yunwei:
 #  task-info:
 #    5: ["com.neusoft.logstore.dispatcher.service.DealService","com.neusoft.logstore.dispatcher.service.DealService"]
 #    1: ["com.neusoft.logstore.dispatcher.service.DealService","com.neusoft.logstore.dispatcher.service.DealService"]
-  quartzPoolSize: 2
+  quartzPoolSize: 10
   quartz-infos:
-    #    - cron: "0 0 12 * * ?"
-    #      tasks: ["com.neusoft.yunwei.Task.CheckReport"]
-    #    - cron: "0 0 12 * * ?"
-    #      tasks: ["com.neusoft.yunwei.Task.CompressionRatio"]
-    #    - cron: "0 0 12 * * ?"
-    #      tasks: ["com.neusoft.yunwei.Task.FileIntegrityAlert"]
-    #    - cron: "0 0 12 * * ?"
-    #      tasks: ["com.neusoft.yunwei.Task.FileStatus"]
-    #    - cron: "0 0 12 * * ?"
-    #      tasks: ["com.neusoft.yunwei.Task.MySqlConnect"]
-    #    - cron: "0 0 12 * * ?"
-    #      tasks: ["com.neusoft.yunwei.Task.Overstock"]
-    #    - cron: "0 0 12 * * ?"
-    #      tasks: ["com.neusoft.yunwei.Task.Reboot"]
-    #    - cron: "0 0 12 * * ?"
-    #      tasks: ["com.neusoft.yunwei.Task.SftpConnectivity"]
-    #    - cron: "0 0 12 * * ?"
-    #      tasks: ["com.neusoft.yunwei.Task.SouthNotUploadData"]
-#    - cron: "0 0/5 * * * ? "
-#      tasks: ["com.neusoft.yunwei.Task.CheckReport"]
-    - cron: "0 0/1 * * * ? "
+    - cron: "0 0/1 * * * ?"
+      tasks: ["com.neusoft.yunwei.Task.CheckReport"]
+    - cron: "0 0/1 * * * ?"
+      tasks: ["com.neusoft.yunwei.Task.CompressionRatio"]
+    - cron: "0 0/1 * * * ?"
+      tasks: ["com.neusoft.yunwei.Task.FileIntegrityAlert"]
+    - cron: "0 0/1 * * * ?"
+      tasks: ["com.neusoft.yunwei.Task.FileStatus"]
+    - cron: "0 0/1 * * * ?"
+      tasks: ["com.neusoft.yunwei.Task.MySqlConnect"]
+    - cron: "0 0/1 * * * ?"
+      tasks: ["com.neusoft.yunwei.Task.Overstock"]
+    - cron: "0 0/1 * * * ?"
+      tasks: ["com.neusoft.yunwei.Task.Reboot"]
+    - cron: "0 0/1 * * * ?"
+      tasks: ["com.neusoft.yunwei.Task.SftpConnectivity"]
+    - cron: "0 0/1 * * * ?"
+      tasks: ["com.neusoft.yunwei.Task.SouthNotUploadData"]
+    - cron: "0 0/1 * * * ?"
       tasks: ["com.neusoft.yunwei.Task.NorthCheck"]
 #    - cron: "0 0/2 * * * ? "
 #      tasks: ["com.neusoft.yunwei.Task.CompressionRatio"]

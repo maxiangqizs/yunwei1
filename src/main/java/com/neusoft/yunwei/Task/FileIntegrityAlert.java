@@ -52,7 +52,7 @@ public class FileIntegrityAlert extends TaskInfo{
 
             // 执行查询
             System.out.println(" 实例化Statement对象...");
-            String sqlconfig = "select ip,mysql_dbname,port,province from T_mysql_url_config ";
+            String sqlconfig = "select ip,mysql_dbname,port,province from T_mysql_url_config where cluster='南向' ";
             prepare = conn.prepareStatement(sqlconfig);
             ResultSet rs = prepare.executeQuery();
             TSouthFileProcessAlr tSouthFileProcessAlr = new TSouthFileProcessAlr();
@@ -94,6 +94,7 @@ public class FileIntegrityAlert extends TaskInfo{
                 while(rs1.next()){
                     String countNum = rs1.getString("countNum");
                     String fail_type = rs1.getString("fail_type");
+                    log.info("countNum:{},fail_type:{}",countNum,fail_type);
                     if ("校验失败文件数".equals(fail_type)){
                         tSouthFileProcessAlr.setCheckFailReupload(new BigDecimal(countNum));
                     }else if ("文件名称非法".equals(fail_type)){
@@ -116,7 +117,9 @@ public class FileIntegrityAlert extends TaskInfo{
                         tSouthFileProcessAlr.setTotalFileCount(new BigDecimal(countNum));
                         allNum = new BigDecimal(countNum);
                     }
-                    failNum = failNum.add(new BigDecimal(countNum));
+                    if (!"总文件数".equals(fail_type)){
+                        failNum = failNum.add(new BigDecimal(countNum));
+                    }
                 }
                 tSouthFileProcessAlr.setProvince(province);
                 tSouthFileProcessAlr.setCheckTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")));
@@ -125,12 +128,12 @@ public class FileIntegrityAlert extends TaskInfo{
                 } else {
                     tSouthFileProcessAlr.setCompleteRatio(failNum.divide(allNum).setScale(BigDecimal.ROUND_HALF_UP,2));
                 }
+                if (tSouthFileProcessAlr!=null) {
+                    itSouthFileProcessAlrService.save(tSouthFileProcessAlr);
+                }
                 rs1.close();
                 prepare1.close();
                 conn1.close();
-            }
-        if (tSouthFileProcessAlr!=null) {
-                itSouthFileProcessAlrService.save(tSouthFileProcessAlr);
             }
 
             // 完成后关闭

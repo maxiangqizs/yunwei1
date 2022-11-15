@@ -57,7 +57,7 @@ public class FileStatus extends TaskInfo {
 
             // 执行查询
             System.out.println(" 实例化Statement对象...");
-            String sqlconfig = "select province,ip,mysql_dbname,port from T_mysql_url_config ";
+            String sqlconfig = "select province,ip,mysql_dbname,port from T_mysql_url_config where cluster='南向' ";
             prepare = conn.prepareStatement(sqlconfig);
             ResultSet rs = prepare.executeQuery();
 

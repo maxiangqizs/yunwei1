@@ -7,6 +7,6 @@
         select business_type  from t_sftp_config  where province like "%"#{province}"%" group by business_type ;
     </select>
     <select id="selectAll" resultType="com.neusoft.yunwei.pojo.TSftpConfig">
-        select  province,business_type,user_name,AES_DECRYPT(password,'123') as password from t_sftp_config where province = #{province} and business_type = #{business_type};
+        select  province,business_type,user_name,password from t_sftp_config where province = #{province} and business_type = #{business_type};
     </select>
 </mapper>
