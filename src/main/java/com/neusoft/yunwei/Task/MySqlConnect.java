@@ -72,7 +72,7 @@ public class MySqlConnect extends TaskInfo {
                 String DB_URL1 = "jdbc:mysql://"+ ip +":"+ port +"/"+my_sql_name+"?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
                 conn1 = DriverManager.getConnection(DB_URL1,USER,PASS);
                 String sql1;
-                sql1 = "show status like '%Mysqlx_stmt_list_clients%'";
+                sql1 = "show status like '%wsrep_cluster_size%'";
                 prepare1 = conn1.prepareStatement(sql1);
                 ResultSet rs1 =prepare1.executeQuery();
                 // 展开结果集数据库
