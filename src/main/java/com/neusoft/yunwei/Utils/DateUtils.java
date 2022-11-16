@@ -1,6 +1,8 @@
 package com.neusoft.yunwei.Utils;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -10,14 +12,15 @@ public class DateUtils {
     private final static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyyMMddHHmmss");
     
     public static String lastday(){
-        String back="";
+        /*String back="";
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
         cal.add(Calendar.DATE, -1);
         Date date2 = cal.getTime();
         String dateStringYYYYMMDD2 = DATE_FORMAT.format(date2);
-        back = dateStringYYYYMMDD2;
-        return back;
+        back = dateStringYYYYMMDD2;*/
+        String startDay = LocalDateTime.now().plusDays(-2).format(DateTimeFormatter.ofPattern("yyyyMMdd"))+"000000";
+        return startDay;
     }
 
     public static String lasttwoday(){
@@ -53,7 +56,8 @@ public class DateUtils {
         return back;
     }
     public static String today (){
-        return  DATE_FORMAT.format(new Date());
+        String endDay = LocalDateTime.now().plusDays(-2).format(DateTimeFormatter.ofPattern("yyyyMMdd"))+"240000";
+        return endDay;
     }
 
 
