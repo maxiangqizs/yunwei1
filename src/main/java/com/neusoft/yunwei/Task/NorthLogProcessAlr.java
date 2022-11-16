@@ -1,5 +1,6 @@
 package com.neusoft.yunwei.Task;
 
+import com.neusoft.yunwei.Utils.ConfigDb;
 import com.neusoft.yunwei.Utils.DateUtils;
 import com.neusoft.yunwei.Utils.LogUtil;
 import com.neusoft.yunwei.pojo.TNorthLogProcessAlr;
@@ -75,7 +76,7 @@ public class NorthLogProcessAlr extends TaskInfo{
     //北向日志数据
     public void loadNorthLogCheck(){
         try{
-            File file=new File("C:/Users/maxiangqi/Desktop/测试数据/北向测试数据/northLogCheck20221108080001.txt");
+            File file=new File(ConfigDb.getInstance().getString("north.log.path"));
             BufferedReader logBR = null;
             logBR = new BufferedReader(new InputStreamReader(new FileInputStream(file )));
             String lastIp = null;
@@ -169,7 +170,7 @@ public class NorthLogProcessAlr extends TaskInfo{
     //北向进程数据
     public void loadNorthProcessCheck(){
         try{
-            File file=new File("C:/Users/maxiangqi/Desktop/测试数据/北向测试数据/northStatusCheck20221108080001.txt");
+            File file=new File(ConfigDb.getInstance().getString("north.process.path"));
             BufferedReader logBR = null;
             logBR = new BufferedReader(new InputStreamReader(new FileInputStream(file )));
             String lastIp = null;
