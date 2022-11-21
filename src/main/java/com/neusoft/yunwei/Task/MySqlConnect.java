@@ -59,7 +59,7 @@ public class MySqlConnect extends TaskInfo {
 
             // 执行查询
             System.out.println(" 实例化Statement对象...");
-            String sqlconfig = "select ip,mysql_dbname,port,province,cluster from T_mysql_url_config ";
+            String sqlconfig = "select ip,mysql_dbname,port,province,cluster from T_mysql_url_config where cluster='南向' ";
             prepare = conn.prepareStatement(sqlconfig);
             ResultSet rs = prepare.executeQuery();
             Runtime rt = Runtime.getRuntime();
@@ -83,6 +83,7 @@ public class MySqlConnect extends TaskInfo {
                     String value = rs1.getString("Value");
                     tMysqlConnectInd.setProvince(province);
                     tMysqlConnectInd.setCluster(cluster);
+                    tMysqlConnectInd.setIp(ip);
                     tMysqlConnectInd.setMysqlClusterConnect("1");
                     tMysqlConnectInd.setClusterSize(value);
                     tMysqlConnectInd.setCheckTime(DateUtils.today());

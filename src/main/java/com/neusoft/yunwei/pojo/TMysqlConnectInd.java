@@ -31,5 +31,7 @@ public class TMysqlConnectInd implements Serializable {
 
     private String clusterSize;
 
+    private String ip;
+
 
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.yunwei.mapper.TAlertLogMapper">
+  <resultMap id="BaseResultMap" type="com.neusoft.yunwei.pojo.TAlertLog">
+    <id column="alertId" jdbcType="VARCHAR" property="alertid" />
+    <result column="alertProject" jdbcType="VARCHAR" property="alertproject" />
+    <result column="alertThreshold" jdbcType="VARCHAR" property="alertthreshold" />
+    <result column="alertType" jdbcType="VARCHAR" property="alerttype" />
+    <result column="alertContent" jdbcType="VARCHAR" property="alertcontent" />
+    <result column="alertTime" jdbcType="VARCHAR" property="alerttime" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    alertId, alertProject, alertThreshold, alertType, alertContent, alertTime, note
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_alert_log
+  </select>
+
+</mapper>
