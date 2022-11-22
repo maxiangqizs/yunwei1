@@ -1,10 +1,8 @@
 package com.neusoft.yunwei.pojo;
 
+import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.springframework.stereotype.Repository;
-
-import java.io.Serializable;
 
 /**
  * <p>
@@ -12,11 +10,10 @@ import java.io.Serializable;
  * </p>
  *
  * @author Ma
- * @since 2022-11-03
+ * @since 2022-11-21
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Repository
 public class TSftpConnectAlr implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -26,6 +23,10 @@ public class TSftpConnectAlr implements Serializable {
     private String ip;
 
     private String checkTime;
+
+    private String collectStartTime;
+
+    private String collectEndTime;
 
 
 }

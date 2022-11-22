@@ -13,7 +13,7 @@ import java.math.BigDecimal;
  * </p>
  *
  * @author Ma
- * @since 2022-10-27
+ * @since 2022-11-22
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -40,79 +40,9 @@ public class TFileStatusInd implements Serializable {
 
     private BigDecimal dataSize;
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
+    private String collectStartTime;
 
-    public String getProvince() {
-        return province;
-    }
+    private String collectEndTime;
 
-    public void setProvince(String province) {
-        this.province = province;
-    }
 
-    public String getCheckTime() {
-        return checkTime;
-    }
-
-    public void setCheckTime(String checkTime) {
-        this.checkTime = checkTime;
-    }
-
-    public String getBusinessType() {
-        return businessType;
-    }
-
-    public void setBusinessType(String businessType) {
-        this.businessType = businessType;
-    }
-
-    public BigDecimal getTotalFileCount() {
-        return totalFileCount;
-    }
-
-    public void setTotalFileCount(BigDecimal totalFileCount) {
-        this.totalFileCount = totalFileCount;
-    }
-
-    public BigDecimal getTotalFileSize() {
-        return totalFileSize;
-    }
-
-    public void setTotalFileSize(BigDecimal totalFileSize) {
-        this.totalFileSize = totalFileSize;
-    }
-
-    public BigDecimal getAbnormalFileSize() {
-        return abnormalFileSize;
-    }
-
-    public void setAbnormalFileSize(BigDecimal abnormalFileSize) {
-        this.abnormalFileSize = abnormalFileSize;
-    }
-
-    public BigDecimal getDataCount() {
-        return dataCount;
-    }
-
-    public void setDataCount(BigDecimal dataCount) {
-        this.dataCount = dataCount;
-    }
-
-    public BigDecimal getAbnormalDataCount() {
-        return abnormalDataCount;
-    }
-
-    public void setAbnormalDataCount(BigDecimal abnormalDataCount) {
-        this.abnormalDataCount = abnormalDataCount;
-    }
-
-    public BigDecimal getDataSize() {
-        return dataSize;
-    }
-
-    public void setDataSize(BigDecimal dataSize) {
-        this.dataSize = dataSize;
-    }
 }

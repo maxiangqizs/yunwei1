@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author Ma
- * @since 2022-11-11
+ * @since 2022-11-22
  */
 public interface TNorthLogProcessAlrMapper extends BaseMapper<TNorthLogProcessAlr> {
 

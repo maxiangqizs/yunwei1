@@ -43,6 +43,20 @@ public class MySqlConnect extends TaskInfo {
     @Autowired
     ITMysqlConnectIndService itMysqlConnectIndService;
 
+    public String connectStatus(String dbUrl,String user, String pass){
+        //返回标志1成功连接,0失败
+        String flag ;
+        try {
+            Connection coon = DriverManager.getConnection( dbUrl,user,pass);
+            flag="1";
+            coon.close();
+        }
+        catch (SQLException se){
+
+            flag="0";
+        }
+        return flag;
+    }
     public void taskConnect() {
         Connection conn = null;
         //轮询各打通池下mysql库链接
@@ -62,7 +76,9 @@ public class MySqlConnect extends TaskInfo {
             String sqlconfig = "select ip,mysql_dbname,port,province,cluster from T_mysql_url_config where cluster='南向' ";
             prepare = conn.prepareStatement(sqlconfig);
             ResultSet rs = prepare.executeQuery();
-            Runtime rt = Runtime.getRuntime();
+            //脚本的开始时间结束时间
+            //String startTime = DateUtils.lastday();
+            //String endTime = DateUtils.today();
             while (rs.next()) {
                 ip = rs.getString("ip");
                 my_sql_name = rs.getString("mysql_dbname");
@@ -70,29 +86,51 @@ public class MySqlConnect extends TaskInfo {
                 province = rs.getString("province");
                 cluster = rs.getString("cluster");
                 String DB_URL1 = "jdbc:mysql://"+ ip +":"+ port +"/"+my_sql_name+"?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
-                conn1 = DriverManager.getConnection(DB_URL1,USER,PASS);
-                String sql1;
-                sql1 = "show status like '%wsrep_cluster_size%'";
-                prepare1 = conn1.prepareStatement(sql1);
-                ResultSet rs1 =prepare1.executeQuery();
-                // 展开结果集数据库
-                while(rs1.next()){
-                    // 通过字段检索
-                    System.out.println("=====");
-                    String variableName = rs1.getString("Variable_name");
-                    String value = rs1.getString("Value");
+                //判断连接是否正常 flag=1正常 flag=0 不正常
+                String flag =connectStatus(DB_URL1,USER,PASS);
+                if (flag.equals("1")) {
+                    conn1 = DriverManager.getConnection(DB_URL1,USER,PASS);
+                    String sql1;
+                    sql1 = "show status like 'wsrep_cluster_size'";
+                    //测试用
+                    //sql1 = "show status like 'Aborted_clients'";
+                    prepare1 = conn1.prepareStatement(sql1);
+                    ResultSet rs1 =prepare1.executeQuery();
+                    // 展开结果集数据库
+                    while(rs1.next()){
+                        // 通过字段检索
+                        System.out.println("=====");
+                        String variableName = rs1.getString("Variable_name");
+                        String value = rs1.getString("Value");
+                        //插入集群节点数
+                        tMysqlConnectInd.setClusterSize(value);
+                    }
+                    //插入其他字段
                     tMysqlConnectInd.setProvince(province);
                     tMysqlConnectInd.setCluster(cluster);
                     tMysqlConnectInd.setIp(ip);
+                    //插入1代表可以通信
                     tMysqlConnectInd.setMysqlClusterConnect("1");
-                    tMysqlConnectInd.setClusterSize(value);
-                    tMysqlConnectInd.setCheckTime(DateUtils.today());
+                    tMysqlConnectInd.setCheckTime(DateUtils.checkTime());
+                    tMysqlConnectInd.setCollectStartTime(DateUtils.nowTime());
+                    tMysqlConnectInd.setCollectEndTime(DateUtils.nowTime());
+                    itMysqlConnectIndService.save(tMysqlConnectInd);
+                    // 完成后关闭
+                    rs1.close();
+                    prepare1.close();
+                    conn1.close();
+                } else {
+                    tMysqlConnectInd.setProvince(province);
+                    tMysqlConnectInd.setCluster(cluster);
+                    tMysqlConnectInd.setIp(ip);
+                    //插入0代表不可以通信
+                    tMysqlConnectInd.setMysqlClusterConnect("0");
+                    tMysqlConnectInd.setCheckTime(DateUtils.checkTime());
+                    tMysqlConnectInd.setCollectStartTime(DateUtils.nowTime());
+                    tMysqlConnectInd.setCollectEndTime(DateUtils.nowTime());
                     itMysqlConnectIndService.save(tMysqlConnectInd);
                 }
-                // 完成后关闭
-                rs1.close();
-                prepare1.close();
-                conn1.close();
+
             }
 
 
@@ -103,11 +141,7 @@ public class MySqlConnect extends TaskInfo {
             logUtil.toDb("MySqlConnect","success");
         }catch(SQLException se){
             // 处理 JDBC 错误
-            tMysqlConnectInd.setProvince(province);
-            tMysqlConnectInd.setCluster(cluster);
-            tMysqlConnectInd.setMysqlClusterConnect("0");
-            tMysqlConnectInd.setCheckTime(DateUtils.today());
-            itMysqlConnectIndService.save(tMysqlConnectInd);
+
             se.printStackTrace();
         }catch(Exception e){
             // 处理 Class.forName 错误

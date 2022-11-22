@@ -12,7 +12,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author Ma
- * @since 2022-11-02
+ * @since 2022-11-21
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -32,6 +32,10 @@ public class TDiskUseRatioAlr implements Serializable {
     private String diskUse;
 
     private String checkTime;
+
+    private String collectStartTime;
+
+    private String collectEndTime;
 
 
 }

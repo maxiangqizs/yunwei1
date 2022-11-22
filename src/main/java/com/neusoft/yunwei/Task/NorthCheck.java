@@ -10,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
 import java.sql.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class NorthCheck extends TaskInfo{
     //mysql 8.0以上版本
@@ -37,10 +35,10 @@ public class NorthCheck extends TaskInfo{
         PreparedStatement prepare0 = null;
         PreparedStatement prepare1 = null;
         //获取当前时间
-        String nowtimstr = DateUtils.today();
+        String nowtimstr = DateUtils.checkTime();
         //当前时间的前一天
-        String startTime = LocalDateTime.now().plusDays(-1).format(DateTimeFormatter.ofPattern("yyyyMMdd"))+"000000";
-        String endTime = LocalDateTime.now().plusDays(-1).format(DateTimeFormatter.ofPattern("yyyyMMdd"))+"240000";
+        String startTime = DateUtils.startDay();
+        String endTime = DateUtils.endDay();
         try{
             // 注册 JDBC 驱动
             Class.forName(JDBC_DRIVER);
@@ -220,6 +218,8 @@ public class NorthCheck extends TaskInfo{
                     tNorthCheckAlr.setSparkMaxTime(sparkMaxTime);
                     tNorthCheckAlr.setUploadMaxTime(uploadMaxTime);
                     tNorthCheckAlr.setTotalConditionCount(totalMaxTime);
+                    tNorthCheckAlr.setCollectStartTime(startTime);
+                    tNorthCheckAlr.setCollectEndTime(endTime);
                     //插入数据
                     itNorthCheckAlrService.save(tNorthCheckAlr);
                 }

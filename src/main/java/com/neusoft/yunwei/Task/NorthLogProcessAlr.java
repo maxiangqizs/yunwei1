@@ -22,14 +22,19 @@ public class NorthLogProcessAlr extends TaskInfo{
     @Autowired
     ITNorthLogProcessAlrService itNorthLogProcessAlrService;
     @Autowired
-    TNorthLogProcessAlr tNorthLogProcessAlr = new TNorthLogProcessAlr();
+    TNorthLogProcessAlr tNorthLogProcessAlr;
     //存储数据map
     Map<String, TNorthLogProcessAlr> alldata = new HashMap<>();
-    String nowtimstr = DateUtils.today();
+    String nowtimstr = DateUtils.checkTime();
+    //当前时间的前一天
+    String startTime = DateUtils.startDay();
+    String endTime = DateUtils.endDay();
     //加载数据,并且插入数据库
     public void loadTODataBase(){
         for (Map.Entry<String, TNorthLogProcessAlr> entry : alldata.entrySet()) {
             TNorthLogProcessAlr tmp = entry.getValue();
+            tmp.setCollectEndTime(endTime);
+            tmp.setCollectStartTime(startTime);
             itNorthLogProcessAlrService.save(tmp);
         }
         //记录日志

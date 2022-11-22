@@ -12,9 +12,8 @@ import java.io.Serializable;
  * </p>
  *
  * @author Ma
- * @since 2022-10-24
+ * @since 2022-11-22
  */
-
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Repository
@@ -24,8 +23,6 @@ public class TSouthUploadAlr implements Serializable {
 
     private String province;
 
-    private String cluster;
-
     private String ip;
 
     private String checkTime;
@@ -33,56 +30,10 @@ public class TSouthUploadAlr implements Serializable {
     private String businessType;
 
     private String port;
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
 
-    public String getProvince() {
-        return province;
-    }
+    private String collectStartTime;
 
-    public void setProvince(String province) {
-        this.province = province;
-    }
+    private String collectEndTime;
 
-    public String getCluster() {
-        return cluster;
-    }
-
-    public void setCluster(String cluster) {
-        this.cluster = cluster;
-    }
-
-    public String getIp() {
-        return ip;
-    }
-
-    public void setIp(String ip) {
-        this.ip = ip;
-    }
-
-    public String getCheckTime() {
-        return checkTime;
-    }
-
-    public void setCheckTime(String checkTime) {
-        this.checkTime = checkTime;
-    }
-
-    public String getBusinessType() {
-        return businessType;
-    }
-
-    public void setBusinessType(String businessType) {
-        this.businessType = businessType;
-    }
-
-    public String getPort() {
-        return port;
-    }
-
-    public void setPort(String port) {
-        this.port = port;
-    }
 
 }

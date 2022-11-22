@@ -99,13 +99,15 @@ public class CheckReport extends TaskInfo {
                        }
                        diskName = head.substring(head.lastIndexOf("/"), head.length());
                        diskUsage = tmpstr + "%";
-                       time = DateUtils.today();
+                       time = DateUtils.checkTime();
                        tDiskUseRatioAlr.setCluster(cluster);
                        tDiskUseRatioAlr.setProvince(provice);
                        tDiskUseRatioAlr.setIp(lastIp);
                        tDiskUseRatioAlr.setDiskName(diskName);
                        tDiskUseRatioAlr.setDiskUse(diskUsage);
                        tDiskUseRatioAlr.setCheckTime(time);
+                       tDiskUseRatioAlr.setCollectEndTime(DateUtils.endDay());
+                       tDiskUseRatioAlr.setCollectStartTime(DateUtils.startDay());
                        iTDiskUseRatioAlrService.save(tDiskUseRatioAlr);
                    }
                }

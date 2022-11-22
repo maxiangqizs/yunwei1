@@ -1,10 +1,9 @@
 package com.neusoft.yunwei.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.neusoft.yunwei.mapper.TFileStatusIndMapper;
 import com.neusoft.yunwei.pojo.TFileStatusInd;
+import com.neusoft.yunwei.mapper.TFileStatusIndMapper;
 import com.neusoft.yunwei.service.ITFileStatusIndService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
@@ -13,14 +12,9 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author Ma
- * @since 2022-10-27
+ * @since 2022-11-22
  */
 @Service
 public class TFileStatusIndServiceImpl extends ServiceImpl<TFileStatusIndMapper, TFileStatusInd> implements ITFileStatusIndService {
-    @Autowired
-    TFileStatusIndMapper tFileStatusIndMapper;
-    @Override
-    public void insert(TFileStatusInd tFileStatusInd) {
-        tFileStatusIndMapper.insert(tFileStatusInd);
-    }
+
 }

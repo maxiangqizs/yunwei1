@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author Ma
- * @since 2022-11-08
+ * @since 2022-11-22
  */
 public interface ITNorthCheckAlrService extends IService<TNorthCheckAlr> {
 

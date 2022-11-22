@@ -197,7 +197,10 @@ public class Reboot extends TaskInfo {
     //更新alldata数据,并且插入数据库
     public void loadTODataBase(){
         List<TServerStatusInd> list = new ArrayList<>();
-        String nowtimstr= DateUtils.today();
+        String nowtimstr= DateUtils.checkTime();
+        //当前时间的前一天
+        String startTime = DateUtils.startDay();
+        String endTime = DateUtils.endDay();
         for (Map.Entry<String, TServerStatusInd> entry : alldata.entrySet()) {
             TServerStatusInd tServerStatusInd = entry.getValue();
                 String ip = entry.getKey();
@@ -214,6 +217,8 @@ public class Reboot extends TaskInfo {
             tServerStatusInd.setProvince(province);
             tServerStatusInd.setCluster(cluster);
             tServerStatusInd.setCheckTime(nowtimstr);
+            tServerStatusInd.setCollectStartTime(startTime);
+            tServerStatusInd.setCollectEndTime(endTime);
             list.add(tServerStatusInd);
         }
         iTServerStatusIndService.saveBatch(list);

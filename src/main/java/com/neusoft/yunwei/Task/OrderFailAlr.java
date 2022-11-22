@@ -12,7 +12,9 @@ import java.math.BigDecimal;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
+/*
+ 待定
+ */
 public class OrderFailAlr extends TaskInfo{
     //mysql 8.0以上版本
     static final String JDBC_DRIVER = ConfigDb.getInstance().getString("jdbc.driver.class");
@@ -92,7 +94,7 @@ public class OrderFailAlr extends TaskInfo{
             rs.close();
             prepare.close();
             conn.close();
-            logUtil.toDb("NorthCheck","success");
+            logUtil.toDb("OrderFailAlr","success");
         }catch(SQLException se){
             // 处理 JDBC 错误
             se.printStackTrace();

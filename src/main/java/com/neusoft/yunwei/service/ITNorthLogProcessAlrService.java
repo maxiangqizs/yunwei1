@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author Ma
- * @since 2022-11-11
+ * @since 2022-11-22
  */
 public interface ITNorthLogProcessAlrService extends IService<TNorthLogProcessAlr> {
 

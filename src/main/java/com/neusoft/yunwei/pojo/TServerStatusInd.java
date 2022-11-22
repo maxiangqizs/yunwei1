@@ -1,9 +1,8 @@
 package com.neusoft.yunwei.pojo;
 
+import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import java.io.Serializable;
 
 /**
  * <p>
@@ -11,7 +10,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author Ma
- * @since 2022-10-31
+ * @since 2022-11-22
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -32,4 +31,10 @@ public class TServerStatusInd implements Serializable {
     private String resetTime;
 
     private String loadBalance;
+
+    private String collectStartTime;
+
+    private String collectEndTime;
+
+
 }

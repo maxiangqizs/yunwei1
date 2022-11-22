@@ -1,10 +1,9 @@
 package com.neusoft.yunwei.pojo;
 
+import java.math.BigDecimal;
+import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import java.io.Serializable;
-import java.math.BigDecimal;
 
 /**
  * <p>
@@ -12,7 +11,7 @@ import java.math.BigDecimal;
  * </p>
  *
  * @author Ma
- * @since 2022-11-03
+ * @since 2022-11-21
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -23,6 +22,8 @@ public class TSouthFileProcessAlr implements Serializable {
     private String province;
 
     private String checkTime;
+
+    private String businessType;
 
     private BigDecimal checkReupload;
 
@@ -45,6 +46,10 @@ public class TSouthFileProcessAlr implements Serializable {
     private BigDecimal totalFileCount;
 
     private BigDecimal completeRatio;
+
+    private String collectStartTime;
+
+    private String collectEndTime;
 
 
 }

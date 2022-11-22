@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author Ma
- * @since 2022-11-08
+ * @since 2022-11-22
  */
 @Service
 public class TNorthCheckAlrServiceImpl extends ServiceImpl<TNorthCheckAlrMapper, TNorthCheckAlr> implements ITNorthCheckAlrService {

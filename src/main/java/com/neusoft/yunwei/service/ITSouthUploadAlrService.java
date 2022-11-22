@@ -1,7 +1,7 @@
 package com.neusoft.yunwei.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.neusoft.yunwei.pojo.TSouthUploadAlr;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * <p>
@@ -9,9 +9,8 @@ import com.neusoft.yunwei.pojo.TSouthUploadAlr;
  * </p>
  *
  * @author Ma
- * @since 2022-10-24
+ * @since 2022-11-22
  */
-
 public interface ITSouthUploadAlrService extends IService<TSouthUploadAlr> {
-    void insert(TSouthUploadAlr tSouthUploadAlr);
+
 }

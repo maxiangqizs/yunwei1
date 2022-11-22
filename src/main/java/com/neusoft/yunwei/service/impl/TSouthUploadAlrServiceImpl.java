@@ -1,10 +1,9 @@
 package com.neusoft.yunwei.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.neusoft.yunwei.mapper.TSouthUploadAlrMapper;
 import com.neusoft.yunwei.pojo.TSouthUploadAlr;
+import com.neusoft.yunwei.mapper.TSouthUploadAlrMapper;
 import com.neusoft.yunwei.service.ITSouthUploadAlrService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
@@ -13,14 +12,9 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author Ma
- * @since 2022-10-24
+ * @since 2022-11-22
  */
 @Service
 public class TSouthUploadAlrServiceImpl extends ServiceImpl<TSouthUploadAlrMapper, TSouthUploadAlr> implements ITSouthUploadAlrService {
-    @Autowired
-    TSouthUploadAlrMapper tSouthUploadAlrMapper;
-    @Override
-    public void insert(TSouthUploadAlr tSouthUploadAlr) {
-        tSouthUploadAlrMapper.insert(tSouthUploadAlr);
-    }
+
 }

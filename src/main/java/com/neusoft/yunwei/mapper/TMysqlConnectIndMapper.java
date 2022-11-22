@@ -2,7 +2,6 @@ package com.neusoft.yunwei.mapper;
 
 import com.neusoft.yunwei.pojo.TMysqlConnectInd;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.springframework.stereotype.Repository;
 
 /**
  * <p>
@@ -10,9 +9,8 @@ import org.springframework.stereotype.Repository;
  * </p>
  *
  * @author Ma
- * @since 2022-11-02
+ * @since 2022-11-21
  */
-@Repository
 public interface TMysqlConnectIndMapper extends BaseMapper<TMysqlConnectInd> {
 
 }

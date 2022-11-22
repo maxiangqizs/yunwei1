@@ -1,12 +1,10 @@
 package com.neusoft.yunwei.pojo;
 
+import java.math.BigDecimal;
 import com.baomidou.mybatisplus.annotation.TableField;
+import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.springframework.stereotype.Repository;
-
-import java.io.Serializable;
-import java.math.BigDecimal;
 
 /**
  * <p>
@@ -14,11 +12,10 @@ import java.math.BigDecimal;
  * </p>
  *
  * @author Ma
- * @since 2022-11-08
+ * @since 2022-11-22
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Repository
 public class TNorthCheckAlr implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -74,6 +71,10 @@ public class TNorthCheckAlr implements Serializable {
     private BigDecimal totalMaxTime;
 
     private BigDecimal totalConditionCount;
+
+    private String collectStartTime;
+
+    private String collectEndTime;
 
 
 }

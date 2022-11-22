@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author Ma
- * @since 2022-11-03
+ * @since 2022-11-21
  */
 public interface ITSftpConnectAlrService extends IService<TSftpConnectAlr> {
 

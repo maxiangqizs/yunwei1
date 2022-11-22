@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author Ma
- * @since 2022-11-02
+ * @since 2022-11-21
  */
 @Service
 public class TMysqlConnectIndServiceImpl extends ServiceImpl<TMysqlConnectIndMapper, TMysqlConnectInd> implements ITMysqlConnectIndService {

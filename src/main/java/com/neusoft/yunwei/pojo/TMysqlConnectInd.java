@@ -12,7 +12,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author Ma
- * @since 2022-11-02
+ * @since 2022-11-21
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -25,13 +25,17 @@ public class TMysqlConnectInd implements Serializable {
 
     private String cluster;
 
+    private String ip;
+
     private String checkTime;
 
     private String mysqlClusterConnect;
 
     private String clusterSize;
 
-    private String ip;
+    private String collectStartTime;
+
+    private String collectEndTime;
 
 
 }

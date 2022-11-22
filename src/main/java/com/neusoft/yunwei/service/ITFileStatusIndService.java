@@ -9,9 +9,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author Ma
- * @since 2022-10-27
+ * @since 2022-11-22
  */
 public interface ITFileStatusIndService extends IService<TFileStatusInd> {
 
-   public void insert(TFileStatusInd tFileStatusInd);
 }

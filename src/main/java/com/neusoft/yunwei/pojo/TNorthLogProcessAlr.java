@@ -12,7 +12,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author Ma
- * @since 2022-11-11
+ * @since 2022-11-22
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -38,6 +38,10 @@ public class TNorthLogProcessAlr implements Serializable {
     private String ferryBuilderErrorProc;
 
     private String northFaceProc;
+
+    private String collectStartTime;
+
+    private String collectEndTime;
 
 
 }

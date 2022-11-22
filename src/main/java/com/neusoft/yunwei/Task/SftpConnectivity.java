@@ -28,8 +28,7 @@ public class SftpConnectivity extends TaskInfo {
     ITProvinceServerConfigService itProvinceServerConfigService;
     @Autowired
     ITSftpConfigService itSftpConfigService;
-//    @Autowired
-//    TSftpConnectAlr tSftpConnectAlr;
+
     @Autowired
     ITSftpConnectAlrService itSftpConnectAlrService;
     static final String PORT = ConfigDb.getInstance().getString("sftp.connection.port");
@@ -91,7 +90,9 @@ public class SftpConnectivity extends TaskInfo {
                 String strIp = ip.next();
                 tSftpConnectAlr.setIp(strIp);
                 tSftpConnectAlr.setProvince(provice);
-                tSftpConnectAlr.setCheckTime(DateUtils.today());
+                tSftpConnectAlr.setCheckTime(DateUtils.checkTime());
+                tSftpConnectAlr.setCollectEndTime(DateUtils.nowTime());
+                tSftpConnectAlr.setCollectStartTime(DateUtils.nowTime());
                 log.info("username：{},strIp:{},PORT:{}",username, strIp, Integer.parseInt(PORT));
                 session = jSch.getSession(username, strIp, Integer.parseInt(PORT));
                 session.setPassword(password);

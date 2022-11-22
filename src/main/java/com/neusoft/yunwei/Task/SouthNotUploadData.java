@@ -39,7 +39,7 @@ public class SouthNotUploadData extends TaskInfo {
         PreparedStatement prepare = null;
         PreparedStatement prepare1 = null;
         //获取当前时间
-        String nowtimstr=DateUtils.today();
+        String nowtimstr=DateUtils.checkTime();
         //获取当前时间-4小时
         String beforenowtim4hour=DateUtils.lasthours();
         try{
@@ -111,7 +111,9 @@ public class SouthNotUploadData extends TaskInfo {
                     tSouthUploadAlr.setCheckTime(checkTime);
                     tSouthUploadAlr.setBusinessType(businessType);
                     tSouthUploadAlr.setPort(nPort);
-                    iTSouthUploadAlrService.insert(tSouthUploadAlr);
+                    tSouthUploadAlr.setCollectStartTime(beforenowtim4hour);
+                    tSouthUploadAlr.setCollectEndTime(checkTime);
+                    iTSouthUploadAlrService.save(tSouthUploadAlr);
 
 
 

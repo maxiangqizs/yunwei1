@@ -10,6 +10,7 @@ import com.neusoft.yunwei.service.ITProvinceServerConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.*;
+import java.math.BigDecimal;
 
 public class Overstock extends TaskInfo {
 
@@ -83,10 +84,12 @@ public class Overstock extends TaskInfo {
                                       tOverStockAlr.setProvince(provice);
                                       tOverStockAlr.setOverStockDirectory(overStockDirectory);
                                       tOverStockAlr.setIp(lastIp);
-                                      tOverStockAlr.setCheckTime(DateUtils.today());
-                                      tOverStockAlr.setOverStockSize(overStockSize);
+                                      tOverStockAlr.setCheckTime(DateUtils.checkTime());
+                                      tOverStockAlr.setCollectStartTime(DateUtils.startDay());
+                                      tOverStockAlr.setCollectEndTime(DateUtils.endDay());
+                                      tOverStockAlr.setOverStockSize(new BigDecimal(String.valueOf(overStockSize)));
                                       System.out.println("准备插入" );
-                                      itOverStockAlrService.insert(tOverStockAlr);
+                                      itOverStockAlrService.save(tOverStockAlr);
                                       System.out.println("插入成功");
                                   }
                                         printFlag = false;

@@ -44,9 +44,10 @@ public class FileStatus extends TaskInfo {
         PreparedStatement prepare1 = null;
         PreparedStatement prepare2 = null;
         //获取当前时间
-        String nowtimstr= DateUtils.today();
+        String nowtimstr= DateUtils.checkTime();
         //获取当前时间前一天
-        String beforenowtim=DateUtils.lastday();
+        String endDay=DateUtils.endDay();
+        String startDay = DateUtils.startDay();
         try{
             // 注册 JDBC 驱动
             Class.forName(JDBC_DRIVER);
@@ -82,10 +83,10 @@ public class FileStatus extends TaskInfo {
                         "group by biz_code)lm on lsfi.businesstype=lm.biz_code";
 
                 prepare1 = conn1.prepareStatement(sql1);
-                prepare1.setString(1,beforenowtim);
-                prepare1.setString(2,nowtimstr);
-                prepare1.setString(3,beforenowtim);
-                prepare1.setString(4,nowtimstr);
+                prepare1.setString(1,startDay);
+                prepare1.setString(2,endDay);
+                prepare1.setString(3,startDay);
+                prepare1.setString(4,endDay);
                 ResultSet rs1 =prepare1.executeQuery();
                 // 展开结果集数据库
                 while(rs1.next()){
@@ -110,7 +111,9 @@ public class FileStatus extends TaskInfo {
                     tFileStatusInd.setDataCount(dataCount);
                     tFileStatusInd.setAbnormalDataCount(abnormalDataCount);
                     tFileStatusInd.setDataSize(dataSize);
-                    iTFileStatusIndService.insert(tFileStatusInd);
+                    tFileStatusInd.setCollectStartTime(startDay);
+                    tFileStatusInd.setCollectEndTime(endDay);
+                    iTFileStatusIndService.save(tFileStatusInd);
                 }
 
                 // 完成后关闭

@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author Ma
- * @since 2022-11-03
+ * @since 2022-11-21
  */
 public interface TSftpConnectAlrMapper extends BaseMapper<TSftpConnectAlr> {
 

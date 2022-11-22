@@ -2,6 +2,7 @@ package com.neusoft.yunwei.Task;
 
 
 import com.neusoft.yunwei.Utils.ConfigDb;
+import com.neusoft.yunwei.Utils.DateUtils;
 import com.neusoft.yunwei.Utils.LogUtil;
 import com.neusoft.yunwei.pojo.TSouthFileProcessAlr;
 import com.neusoft.yunwei.service.ITSouthFileProcessAlrService;
@@ -122,7 +123,9 @@ public class FileIntegrityAlert extends TaskInfo{
                     }
                 }
                 tSouthFileProcessAlr.setProvince(province);
-                tSouthFileProcessAlr.setCheckTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")));
+                tSouthFileProcessAlr.setCheckTime( DateUtils.checkTime());
+                tSouthFileProcessAlr.setCollectEndTime(endDay);
+                tSouthFileProcessAlr.setCollectStartTime(startDay);
                 if (failNum.toString().equals("0")||allNum.toString().equals("0")) {
                     tSouthFileProcessAlr.setCompleteRatio(value);
                 } else {

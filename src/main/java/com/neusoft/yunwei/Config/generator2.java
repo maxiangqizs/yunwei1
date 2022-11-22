@@ -21,6 +21,7 @@ public class generator2 {
         gc.setOutputDir(projectPath + "/src/main/java");
         gc.setAuthor("Ma");
         gc.setOpen(false);
+        gc.setFileOverride(true);
         // gc.setSwagger2(true); 实体属性 Swagger2 注解
         mpg.setGlobalConfig(gc);
         // 数据源配置
@@ -60,7 +61,7 @@ public class generator2 {
         strategy.setRestControllerStyle(true);
 
         //strategy.setSuperEntityColumns("id");ANTI_D_MODEL_MATCH_DATA
-        strategy.setInclude("T_north_order_fail_alr");
+        strategy.setInclude("t_south_upload_alr");
         strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix(pc.getModuleName() + "_");
         mpg.setStrategy(strategy);

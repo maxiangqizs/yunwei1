@@ -1,18 +1,16 @@
 package com.neusoft.yunwei.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.neusoft.yunwei.pojo.TSouthUploadAlr;
-import org.springframework.stereotype.Repository;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
  * <p>
  *  Mapper 接口
  * </p>
  *
- * @author Maxq
- * @since 2022-10-24
+ * @author Ma
+ * @since 2022-11-22
  */
-@Repository
 public interface TSouthUploadAlrMapper extends BaseMapper<TSouthUploadAlr> {
 
 }

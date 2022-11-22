@@ -1,8 +1,7 @@
 package com.neusoft.yunwei.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.neusoft.yunwei.pojo.TFileStatusInd;
-import org.springframework.stereotype.Repository;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
  * <p>
@@ -10,8 +9,8 @@ import org.springframework.stereotype.Repository;
  * </p>
  *
  * @author Ma
- * @since 2022-10-27
+ * @since 2022-11-22
  */
-@Repository
 public interface TFileStatusIndMapper extends BaseMapper<TFileStatusInd> {
+
 }
