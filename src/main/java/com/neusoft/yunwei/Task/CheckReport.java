@@ -7,7 +7,6 @@ import com.neusoft.yunwei.Utils.DateUtils;
 import com.neusoft.yunwei.Utils.LogUtil;
 import com.neusoft.yunwei.pojo.TDiskUseRatioAlr;
 import com.neusoft.yunwei.service.ITDiskUseRatioAlrService;
-import com.neusoft.yunwei.service.ITNorthCheckRelaAlrService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,8 +45,7 @@ public class CheckReport extends TaskInfo {
     ITDiskUseRatioAlrService iTDiskUseRatioAlrService;
     @Autowired
     TDiskUseRatioAlr tDiskUseRatioAlr;
-    @Autowired
-    ITNorthCheckRelaAlrService itNorthCheckRelaAlrService;
+
     @Override
     public void excuteTask(){
         try{

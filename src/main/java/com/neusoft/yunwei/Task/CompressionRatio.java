@@ -74,7 +74,7 @@ public class CompressionRatio extends TaskInfo{
                         "sum(case when biz_code like '5G%'then size_mb else 0 end)/1024/1024 as '5g压缩前',\n" +
                         "b.province\n" +
                         "from log_metrics a  inner join t_province_server_config b on a.ip=b.business_ip  \n" +
-                        "where stage='read' and log_time >= '" + DateUtils.lastday() +"' AND log_time < '"+ DateUtils.nowTime()+"'\n" +
+                        "where stage='read' and log_time >= '" + DateUtils.lastday() +"' AND log_time < '"+ DateUtils.today()+"'\n" +
                         "group by b.province;";
 
                 prepare1 = conn1.prepareStatement(sql1);
@@ -108,7 +108,7 @@ public class CompressionRatio extends TaskInfo{
                         tDataCompressRatioInd.setDataType(key);
                         tDataCompressRatioInd.setBeforeCompress(value);
 /*                        tDataCompressRatioInd.setCompressRatio(Float.valueOf(BeforeCompression)/Float.valueOf(String.valueOf(p)) +"");*/
-                        tDataCompressRatioInd.setCheckTime(DateUtils.nowTime());
+                        tDataCompressRatioInd.setCheckTime(DateUtils.today());
                         tDataCompressRatioInd.setProcessPerformance(Float.parseFloat(value)*1024*1024/(24*60*60)/number+"");
                         System.out.println(Float.parseFloat(value)*1024*1024/(24*60*60)/20+"");
                         itDataCompressRatioIndService.insert(tDataCompressRatioInd);
