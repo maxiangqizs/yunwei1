@@ -23,7 +23,7 @@ public class LogUtil {
      public void toDb(String service,String status) {
          tLog.setService( service);
          tLog.setStatus(status);
-         tLog.setUpdateTime(DateUtils.today());
+         tLog.setUpdateTime(DateUtils.nowTime());
          itLogService.save(tLog);
          logger.info("功能:" +service+"成功插入日志表");
      }

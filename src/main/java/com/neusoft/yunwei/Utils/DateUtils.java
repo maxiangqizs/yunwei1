@@ -55,10 +55,7 @@ public class DateUtils {
         back = dateStringYYYYMMDD2;
         return back;
     }
-    public static String today(){
-        String endDay = LocalDateTime.now().plusDays(-1).format(DateTimeFormatter.ofPattern("yyyyMMdd"))+"240000";
-        return endDay;
-    }
+
     public static String startDay(){
         String startDay = LocalDateTime.now().plusDays(-1).format(DateTimeFormatter.ofPattern("yyyyMMdd"))+"000000";
         return startDay;

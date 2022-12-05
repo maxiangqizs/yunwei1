@@ -13,7 +13,9 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
-
+/*
+ 北向错误日志和进程落地
+ */
 public class NorthLogProcessAlr extends TaskInfo{
     //记录日志工具
     @Autowired
